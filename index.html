@@ -131,7 +131,7 @@
     left: 0;
     width: 100vw;
     height: 60vh;
-    pointer-events: none; /* Tıklamayı engellememesi için */
+    pointer-events: none;
   }
 
   .flower-wrapper {
@@ -146,12 +146,12 @@
   /* Çiçeğin Sapı */
   .stem {
     width: 8px;
-    height: 0; /* Animasyonla uzayacak */
+    height: 0;
     background: linear-gradient(to top, var(--techno-cyan-dark), var(--techno-cyan));
     box-shadow: 0 0 15px var(--techno-cyan), inset 0 0 5px rgba(255,255,255,0.5);
     border-radius: 4px;
     position: relative;
-    animation: growStem 2s ease-in-out forwards;
+    animation: growStem 2.5s ease-in-out forwards;
   }
   @keyframes growStem { to { height: 260px; } }
 
@@ -183,7 +183,7 @@
   /* Çiçek Başlığı (Kasımpatı) */
   .flower-head {
     position: absolute;
-    top: 0; left: 4px; /* Sapın tam ortası */
+    top: 0; left: 4px;
   }
 
   /* Kasımpatı Taç Yaprakları (Petals) */
@@ -233,7 +233,7 @@
   }
   @keyframes popCenter { to { transform: translate(-50%, -50%) scale(1); } }
 
-  /* Yazılar ve Penguen (Bahçenin Üstünde) */
+  /* Yazılar ve Penguen */
   .yes-text {
     font-family: 'Pacifico', cursive;
     font-size: clamp(1.8rem, 6vw, 3rem);
@@ -264,7 +264,6 @@
     100% { transform: translateY(-15px); }
   }
 
-  /* Uçuşan Kalpler ve Yıldız Tozları */
   .floater {
     position: fixed; pointer-events: none;
     animation: floatUp 2.5s ease-out forwards;
@@ -307,12 +306,10 @@
   <div class="penguin-row">
     <img src="penguen.gif" alt="Kalp Atan Penguen" class="penguin-gif" />
   </div>
-  
   <div id="garden"></div>
 </div>
 
 <script>
-  // ── Mesajlar (Tam 9 Adet) ────────────────────────────────────────────────
   const messages = [
     "Seni Çok Seviyorum, Beni Affeder Misin? 🥺",
     "Çabalayacağız... Lütfen beni affet 💝",
@@ -333,10 +330,8 @@
   const yesBtn = document.getElementById('yes-btn');
   const noBtn  = document.getElementById('no-btn');
 
-  // ── Hayır Butonu Tıklanma Olayı ──────────────────────────────────────────
   function sayNo() {
     noCount++;
-
     msgEl.classList.add('hidden');
     setTimeout(() => {
       const msgIndex = Math.min(noCount, messages.length - 1);
@@ -350,13 +345,11 @@
     yesBtn.style.fontSize = yesFontSize + 'rem';
     yesBtn.style.padding  = `${yesPaddingV}px ${yesPaddingH}px`;
 
-    // "Hayır" butonu yerinde kalır ama 13. basışta kaybolur.
     if (noCount >= 13) {
         noBtn.style.display = 'none'; 
     }
   }
 
-  // ── Evet Butonu Tıklanma Olayı ───────────────────────────────────────────
   function sayYes() {
     const emojis = ['💕','💗','💖','💝','🌸','✨','💞'];
     for (let i = 0; i < 35; i++) {
@@ -378,48 +371,46 @@
       
       document.body.style.background = 'radial-gradient(circle at center, #2a0845 0%, #12011a 60%, #000000 100%)';
       
-      // Tam 23 adet Kasımpatı oluştur!
-      createGardenOf23();
+      createGardenOf23(); // Çiçek tarlasını kur
       
-      // Havada uçuşan partiküller
       for(let i=0; i<60; i++) {
         setTimeout(() => sparkle(), 2500 + (Math.random() * 3000));
       }
     }, 800);
   }
 
-  // ── 23 ADET KASIMPATI OLUŞTURMA FONKSİYONU ───────────────────────────────
   function createGardenOf23() {
     const garden = document.getElementById('garden');
-    garden.innerHTML = ''; // Temizle
-    
-    // Toplam 23 çiçek
+    garden.innerHTML = ''; 
     const totalFlowers = 23;
     
+    // Çiçeklerin üst üste binmesini önlemek için ekranı 23'e bölen sistem:
+    let positions = [];
+    const step = 94 / totalFlowers; // Ekranın %94'lük kısmını eşit böl
     for (let i = 0; i < totalFlowers; i++) {
-      // Çiçeğin Ana Kapsayıcısı
+      // Eşit aralık + çok ufak doğal sapma
+      positions.push(3 + (i * step) + (Math.random() * (step * 0.6)));
+    }
+    // Hangi aralıkta hangi boyut/gecikme çıkacağı rastgele olsun diye diziyi karıştır
+    positions.sort(() => Math.random() - 0.5);
+
+    for (let i = 0; i < totalFlowers; i++) {
       let flowerWrapper = document.createElement('div');
       flowerWrapper.className = 'flower-wrapper';
       
-      // Rastgele Konum (%5 ile %95 arası ekran genişliği)
-      let leftPos = 5 + Math.random() * 90;
-      
-      // Rastgele Boyut (Arkada kalanlar küçük, öndekiler büyük)
-      let scale = 0.3 + Math.random() * 0.55; // 0.3x ile 0.85x arası büyüklük
-      
-      // Rastgele Gecikme (Her çiçek farklı salisede büyümeye başlasın)
-      let delay = Math.random() * 2.5; // 0 ile 2.5 saniye arası gecikme
+      // Artık her çiçeğin kesinlikle kendine ait bir yatay konumu var!
+      let leftPos = positions[i]; 
+      let scale = 0.35 + Math.random() * 0.50; // Boyut aralığı
+      let delay = Math.random() * 3; // Açma gecikmesi
       
       flowerWrapper.style.left = leftPos + 'vw';
       flowerWrapper.style.transform = `scale(${scale})`;
-      flowerWrapper.style.zIndex = Math.floor(scale * 100); // Büyükler öne geçsin
+      flowerWrapper.style.zIndex = Math.floor(scale * 100); // Büyük olan önde dursun
       
-      // SAPI
       let stem = document.createElement('div');
       stem.className = 'stem';
       stem.style.animationDelay = `${0.5 + delay}s`;
       
-      // YAPRAKLAR (Leaves)
       let leafR = document.createElement('div');
       leafR.className = 'leaf right';
       leafR.style.animationDelay = `${1.2 + delay}s`;
@@ -428,17 +419,14 @@
       leafL.className = 'leaf left';
       leafL.style.animationDelay = `${1.5 + delay}s`;
       
-      // ÇİÇEK BAŞI
       let head = document.createElement('div');
       head.className = 'flower-head';
       
-      // ÇİÇEK GÖBEĞİ
       let center = document.createElement('div');
       center.className = 'flower-center';
       center.style.animationDelay = `${4.5 + delay}s`;
       head.appendChild(center);
       
-      // KASIMPATI TAÇ YAPRAKLARINI ÜRET (Fonksiyona gecikmeyi de gönderiyoruz)
       buildChrysanthemum(head, delay);
       
       stem.appendChild(leafR);
@@ -450,10 +438,11 @@
   }
 
   function buildChrysanthemum(flowerHead, extraDelay) {
+    // Toplam yaprak sayısı 23 çiçekte kasmaması için optimize edildi
     const layers = [
-      { class: 'layer1', count: 32, delayStart: 2.2 }, // En dış
-      { class: 'layer2', count: 24, delayStart: 2.8 }, // Orta
-      { class: 'layer3', count: 16, delayStart: 3.4 }  // İç
+      { class: 'layer1', count: 24, delayStart: 2.2 },
+      { class: 'layer2', count: 18, delayStart: 2.8 },
+      { class: 'layer3', count: 12, delayStart: 3.4 }
     ];
 
     layers.forEach(layer => {
@@ -463,8 +452,7 @@
         petal.style.setProperty('--i', i);
         petal.style.setProperty('--total', layer.count);
         
-        // Çiçeğin genel gecikmesi + yaprak açma süresi
-        let totalDelay = layer.delayStart + extraDelay + (i * 0.04);
+        let totalDelay = layer.delayStart + extraDelay + (i * 0.05);
         petal.style.animationDelay = `${totalDelay}s`;
         
         flowerHead.appendChild(petal);
