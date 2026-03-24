@@ -13,9 +13,8 @@
     --pink: #ff4da6;
     --pink-light: #ff8dcb;
     --pink-deep: #d6006e;
-    --blush: #ffe4f3;
-    --petal: #ffd6ee;
-    --text-dark: #5a1a3a;
+    --techno-purple: #9c27b0;
+    --techno-blue: #00bcd4;
   }
 
   body {
@@ -29,7 +28,7 @@
     transition: background 1.5s ease;
   }
 
-  /* Subtle background bubbles */
+  /* Arka plan baloncukları */
   .bg-bubble {
     position: fixed;
     border-radius: 50%;
@@ -44,7 +43,7 @@
     100% { transform: translateY(-20vh) scale(1.2); opacity: 0; }
   }
 
-  /* ---- MAIN SCREEN ---- */
+  /* ---- ANA EKRAN ---- */
   #main-screen {
     display: flex;
     flex-direction: column;
@@ -54,6 +53,21 @@
     max-width: 560px;
     width: 100%;
     text-align: center;
+  }
+
+  /* Banner en üstte */
+  .banner-wrap {
+    width: 100%;
+    max-width: 320px;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 6px 30px rgba(255, 77, 166, 0.3);
+    border: 3px solid rgba(255, 141, 203, 0.5);
+    margin-bottom: 10px;
+  }
+  .banner-wrap img {
+    width: 100%;
+    display: block;
   }
 
   .msg-box {
@@ -69,23 +83,10 @@
     color: var(--pink-deep);
     text-shadow: 0 2px 14px rgba(214, 0, 110, 0.25);
     line-height: 1.5;
-    transition: opacity 0.45s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
     max-width: 480px;
   }
-  #message.hidden { opacity: 0; }
-
-  .banner-wrap {
-    width: 100%;
-    max-width: 320px;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 6px 30px rgba(255, 77, 166, 0.3);
-    border: 3px solid rgba(255, 141, 203, 0.5);
-  }
-  .banner-wrap img {
-    width: 100%;
-    display: block;
-  }
+  #message.hidden { opacity: 0; transform: scale(0.95); }
 
   .btn-area {
     display: flex;
@@ -95,6 +96,7 @@
     flex-wrap: wrap;
     position: relative;
     min-height: 80px;
+    width: 100%;
   }
 
   #yes-btn {
@@ -108,9 +110,7 @@
     font-weight: 900;
     cursor: pointer;
     box-shadow: 0 5px 22px rgba(255, 63, 160, 0.45);
-    transition: font-size 0.4s cubic-bezier(.34,1.56,.64,1),
-                padding 0.4s cubic-bezier(.34,1.56,.64,1),
-                transform 0.15s;
+    transition: all 0.3s cubic-bezier(.34,1.56,.64,1);
     position: relative;
     z-index: 10;
   }
@@ -127,13 +127,13 @@
     font-size: 1rem;
     font-weight: 700;
     cursor: pointer;
-    transition: font-size 0.3s, padding 0.3s, opacity 0.3s, left 0.05s, top 0.05s;
+    transition: all 0.2s;
     position: relative;
-    z-index: 10;
+    z-index: 20;
   }
   #no-btn:hover { background: #fff0f7; color: #999; }
 
-  /* ---- YES SCREEN ---- */
+  /* ---- EVET EKRANI ---- */
   #yes-screen {
     display: none;
     flex-direction: column;
@@ -169,8 +169,15 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 3rem;
-    animation: heartbeat 0.9s ease-in-out infinite;
   }
+  
+  /* Penguen.gif için stil */
+  .penguin-gif {
+    max-width: 120px;
+    height: auto;
+    animation: heartbeat 0.75s ease-in-out infinite alternate;
+  }
+  
   .heart-icon {
     font-size: 2.2rem;
     display: inline-block;
@@ -178,11 +185,11 @@
   }
   @keyframes heartbeat {
     0%   { transform: scale(1); }
-    50%  { transform: scale(1.2); }
+    50%  { transform: scale(1.15); }
     100% { transform: scale(1); }
   }
 
-  /* Floating hearts */
+  /* Uçuşan kalpler */
   .floater {
     position: fixed;
     pointer-events: none;
@@ -195,7 +202,7 @@
     100% { opacity: 0; transform: translateY(-220px) rotate(20deg) scale(0.4); }
   }
 
-  /* Sparkle particles on canvas */
+  /* Parlayan partiküller */
   .sparkle {
     position: fixed;
     pointer-events: none;
@@ -212,8 +219,8 @@
 </head>
 <body>
 
-<!-- Background bubbles -->
 <script>
+  // Arka plan baloncuklarını oluşturur
   (function() {
     const colors = ['#ffb3d9','#ff8dcb','#ffc2e0','#ff69b4','#ffd6ee'];
     for (let i = 0; i < 12; i++) {
@@ -233,15 +240,14 @@
   })();
 </script>
 
-<!-- MAIN SCREEN -->
 <div id="main-screen">
+
+  <div class="banner-wrap">
+    <img src="banner.gif" alt="Seni Seviyorum Banner" />
+  </div>
 
   <div class="msg-box">
     <div id="message">Seni Çok Seviyorum, Beni Affeder Misin? 🥺</div>
-  </div>
-
-  <div class="banner-wrap">
-    <img src="banner.gif" alt="banner" />
   </div>
 
   <div class="btn-area" id="btn-area">
@@ -251,122 +257,90 @@
 
 </div>
 
-<!-- YES SCREEN -->
 <div id="yes-screen">
-  <canvas id="flower-canvas" width="460" height="460"></canvas>
+  <canvas id="flower-canvas" width="500" height="500"></canvas>
   <div class="yes-text">Seni çok seviyorum! 💖</div>
   <div class="penguin-row">
-    🐧 <span class="heart-icon">💗</span>
+    <img src="penguen.gif" alt="Kalp Atan Penguen" class="penguin-gif" />
   </div>
 </div>
 
 <script>
-  // ── Messages ──────────────────────────────────────────────────────────────
-  const rotatingMsgs = [
-    "Seni Çok Seviyorum, Beni Affeder Misin? 🥺",
-    "Çabalayacağız... Beni affet 💝",
-    "Lütfen? Bir şans daha ver 🙏",
-    "Seni kaybetmek istemiyorum 💕",
-    "Affetmeden gidemezsin! 🥺",
-    "Söz veriyorum, daha iyi olacağım 💌",
-    "Hayatımın en güzeli sensin...",
-    "Sana layık biri olmaya çalışıyorum 🐧❤️",
-    "Bir bak şu halime! Beni affet! 😭",
-  ];
-  const pleadMsgs = [
-    "Emin misin? 😢",
-    "Bir daha düşün... 🥺",
-    "Hayır deme bana! 💔",
-    "Lütfen lütfen lütfen! 🙏",
-    "Yok yok hayır yok! 😭",
-    "Evet de gel ya! 💕",
-    "İnatçısın sen de! 😤💕",
-    "Tamam tamam, özür dilerim! 🥺",
-    "Hayır tuşu neden var ki bu sitede!",
-    "Görmüyor musun ne kadar seviyorum seni! 💖",
+  // ── Mesajlar (Tam 9 Adet) ────────────────────────────────────────────────
+  const messages = [
+    "Seni Çok Seviyorum, Beni Affeder Misin? 🥺", // 1 (Başlangıç)
+    "Çabalayacağız... Lütfen beni affet 💝", // 2
+    "Bir şans daha ver, pişman olmayacaksın 🙏", // 3
+    "Seni kaybetmek istemiyorum 💕", // 4
+    "Sensiz bir hiçim, affetmeden gidemezsin! 🥺", // 5
+    "Söz veriyorum, her şey daha güzel olacak 💌", // 6
+    "Hayatımın en güzel detayı sensin...", // 7
+    "Sana layık biri olmak için çabalıyorum 🐧❤️", // 8
+    "Bir bak şu halime! Nolur beni affet! 😭" // 9
   ];
 
-  let msgIndex = 0;
   let noCount = 0;
-  let cycleInterval;
+  let yesFontSize = 1.25; // rem
+  let yesPaddingV = 14;
+  let yesPaddingH = 36;
   const msgEl = document.getElementById('message');
   const yesBtn = document.getElementById('yes-btn');
   const noBtn  = document.getElementById('no-btn');
-  let yesFontSize = 1.25; // rem
-  let yesPaddingV = 14, yesPaddingH = 36;
 
-  function cycleMessage() {
-    msgEl.classList.add('hidden');
-    setTimeout(() => {
-      msgIndex = (msgIndex + 1) % rotatingMsgs.length;
-      msgEl.textContent = rotatingMsgs[msgIndex];
-      msgEl.classList.remove('hidden');
-    }, 450);
-  }
-
-  cycleInterval = setInterval(cycleMessage, 3200);
-
-  // ── No button ─────────────────────────────────────────────────────────────
+  // ── Hayır Butonu Tıklanma Olayı ──────────────────────────────────────────
   function sayNo() {
     noCount++;
 
-    // Show pleading message
+    // 1. Yazıyı değiştir (Sadece butona basıldığında)
     msgEl.classList.add('hidden');
     setTimeout(() => {
-      msgEl.textContent = pleadMsgs[Math.min(noCount - 1, pleadMsgs.length - 1)];
+      // noCount'a göre diziden mesaj seç, 9'dan sonraysa son mesajda kal
+      const msgIndex = Math.min(noCount, messages.length - 1);
+      msgEl.textContent = messages[msgIndex];
       msgEl.classList.remove('hidden');
-    }, 450);
+    }, 150);
 
-    // Grow yes button
-    yesFontSize = Math.min(yesFontSize + 0.22, 3.8);
-    yesPaddingV = Math.min(yesPaddingV + 5, 50);
-    yesPaddingH = Math.min(yesPaddingH + 10, 100);
+    // 2. Evet butonunu büyüt
+    yesFontSize += 0.4;
+    yesPaddingV += 8;
+    yesPaddingH += 16;
     yesBtn.style.fontSize = yesFontSize + 'rem';
     yesBtn.style.padding  = `${yesPaddingV}px ${yesPaddingH}px`;
 
-    // Shrink no button
-    const noScale = Math.max(1 - noCount * 0.09, 0.42);
-    noBtn.style.fontSize = noScale + 'rem';
-    noBtn.style.padding  = `${Math.max(11 - noCount * 2, 3)}px ${Math.max(26 - noCount * 4, 8)}px`;
-
-    // Escape after 3 clicks
-    if (noCount >= 3) {
-      noBtn.style.position = 'fixed';
-      noBtn.style.transition = 'font-size 0.3s, padding 0.3s, opacity 0.3s';
-      const margin = 80;
-      noBtn.style.left = (margin + Math.random() * (window.innerWidth  - margin * 2 - 80)) + 'px';
-      noBtn.style.top  = (margin + Math.random() * (window.innerHeight - margin * 2 - 40)) + 'px';
+    // 3. 13. Tıklamada butonu tamamen gizle
+    if (noCount >= 13) {
+        noBtn.style.display = 'none'; 
     }
   }
 
-  // ── Yes button ────────────────────────────────────────────────────────────
+  // ── Evet Butonu Tıklanma Olayı ───────────────────────────────────────────
   function sayYes() {
-    clearInterval(cycleInterval);
-
-    // Burst of floating hearts
+    // Kalp patlaması efekti
     const emojis = ['💕','💗','💖','💝','🌸','✨','💞'];
-    for (let i = 0; i < 28; i++) {
+    for (let i = 0; i < 35; i++) {
       setTimeout(() => {
         const el = document.createElement('div');
         el.className = 'floater';
         el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-        el.style.left = (10 + Math.random() * 80) + 'vw';
+        el.style.left = (5 + Math.random() * 90) + 'vw';
         el.style.top  = (60 + Math.random() * 30) + 'vh';
         document.body.appendChild(el);
-        setTimeout(() => el.remove(), 2600);
-      }, i * 80);
+        setTimeout(() => el.remove(), 2500);
+      }, i * 60);
     }
 
+    // Ekranı değiştir
     setTimeout(() => {
       document.getElementById('main-screen').style.display = 'none';
       const ys = document.getElementById('yes-screen');
       ys.style.display = 'flex';
+      // Techno karanlık arkaplan
       document.body.style.background = 'linear-gradient(160deg, #12011a 0%, #2a0530 55%, #110018 100%)';
       setTimeout(bloomChrysanthemum, 500);
-    }, 1200);
+    }, 800);
   }
 
-  // ── Chrysanthemum ─────────────────────────────────────────────────────────
+  // ── Techno Dijital Kasımpatı (Fractal Çizim) ─────────────────────────────
   function bloomChrysanthemum() {
     const canvas = document.getElementById('flower-canvas');
     const ctx    = canvas.getContext('2d');
@@ -375,20 +349,20 @@
 
     ctx.clearRect(0, 0, W, H);
 
-    const totalPetals = 36;
+    const totalPetals = 50; // Çok daha sık petal
     let drawn = 0;
 
     function branch(x, y, angle, len, depth, hue, alpha) {
-      if (depth <= 0 || len < 1.2) return;
+      if (depth <= 0 || len < 1.5) return; // Dallanma sınırları (daha dallı budaklı)
       const ex = x + Math.cos(angle) * len;
       const ey = y + Math.sin(angle) * len;
 
       ctx.save();
       ctx.globalAlpha = alpha;
-      ctx.shadowBlur  = 12;
-      ctx.shadowColor = `hsl(${hue}, 100%, 72%)`;
-      ctx.strokeStyle = `hsl(${hue}, 88%, ${52 + depth * 4}%)`;
-      ctx.lineWidth   = Math.max(0.4, depth * 0.28);
+      ctx.shadowBlur  = 20; // Güçlü neon parlama
+      ctx.shadowColor = `hsl(${hue}, 100%, 75%)`; 
+      ctx.strokeStyle = `hsl(${hue}, 98%, ${55 + depth * 3}%)`;
+      ctx.lineWidth   = Math.max(0.5, depth * 0.4); 
       ctx.lineCap     = 'round';
       ctx.beginPath();
       ctx.moveTo(x, y);
@@ -396,48 +370,51 @@
       ctx.stroke();
       ctx.restore();
 
-      const spread = 0.22 + (8 - depth) * 0.03;
-      branch(ex, ey, angle - spread, len * 0.70, depth - 1, hue + 6,  alpha * 0.92);
-      branch(ex, ey, angle + spread, len * 0.70, depth - 1, hue - 6,  alpha * 0.92);
-      branch(ex, ey, angle,          len * 0.78, depth - 1, hue,       alpha * 0.95);
+      const spread = 0.25 + (8 - depth) * 0.04;
+      // 3 yönlü dallanma
+      branch(ex, ey, angle - spread, len * 0.72, depth - 1, hue + 12, alpha * 0.9);
+      branch(ex, ey, angle + spread, len * 0.72, depth - 1, hue - 12, alpha * 0.9);
+      branch(ex, ey, angle,          len * 0.82, depth - 1, hue,      alpha * 0.98); 
     }
 
     function drawPetal() {
       if (drawn >= totalPetals) {
-        // Glowing center
-        const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, 22);
+        // Çiçek tamamlandığında ortasına parlayan bir çekirdek ekle
+        const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, 30);
         g.addColorStop(0,   'rgba(255,255,255,1)');
-        g.addColorStop(0.4, 'rgba(255,150,220,0.9)');
-        g.addColorStop(1,   'rgba(255,80,180,0)');
+        g.addColorStop(0.3, 'rgba(255,105,180,0.9)');
+        g.addColorStop(1,   'rgba(255,20,147,0)');
+        
         ctx.save();
-        ctx.shadowBlur  = 30;
-        ctx.shadowColor = '#fff';
+        ctx.shadowBlur  = 50;
+        ctx.shadowColor = '#ff69b4';
         ctx.fillStyle   = g;
         ctx.beginPath();
-        ctx.arc(cx, cy, 22, 0, Math.PI * 2);
+        ctx.arc(cx, cy, 30, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
 
-        // Scatter sparkles
-        for (let s = 0; s < 20; s++) {
-          setTimeout(() => sparkle(), s * 120);
+        // Son dokunuş: Etrafa partiküller saç
+        for (let s = 0; s < 35; s++) {
+          setTimeout(() => sparkle(), s * 100);
         }
         return;
       }
 
       const petalAngle = (drawn / totalPetals) * Math.PI * 2 - Math.PI / 2;
-      // Hue: 295 (violet-pink) → 340 (hot pink) → 355 (rose)
-      const hue = 295 + (drawn / totalPetals) * 65;
+      // Techno pembe / mor renk paleti geçişi: 280 (mor) -> 350 (neon pembe)
+      const hue = 280 + (drawn / totalPetals) * 70;
 
-      branch(cx, cy, petalAngle, 92, 8, hue, 0.95);
+      branch(cx, cy, petalAngle, 110, 8, hue, 0.98); 
 
       drawn++;
-      setTimeout(drawPetal, 55);
+      setTimeout(drawPetal, 35); // Çiçeğin açma hızı
     }
 
     drawPetal();
   }
 
+  // Uçuşan küçük ışıltılar
   function sparkle() {
     const el = document.createElement('div');
     el.className = 'sparkle';
@@ -445,11 +422,11 @@
     const cy = window.innerHeight / 2;
     el.style.left = cx + 'px';
     el.style.top  = cy + 'px';
-    const tx = (Math.random() - 0.5) * 260;
-    const ty = (Math.random() - 0.5) * 260;
+    const tx = (Math.random() - 0.5) * 350;
+    const ty = (Math.random() - 0.5) * 350;
     el.style.setProperty('--tx', tx + 'px');
     el.style.setProperty('--ty', ty + 'px');
-    const colors = ['#ff69b4','#ff8dcb','#ffc0da','#fff','#ff4da6'];
+    const colors = ['#ff69b4','#ff8dcb','#ff1493','#fff','#ff00ff','#00bcd4']; // Extra techno mavisi
     el.style.background = colors[Math.floor(Math.random() * colors.length)];
     document.body.appendChild(el);
     setTimeout(() => el.remove(), 1100);
