@@ -20,12 +20,13 @@
       align-items: center;
       text-align: center;
       overflow: hidden;
+      padding: 20px;
     }
 
     .card {
       width: 90%;
-      max-width: 520px;
-      background: rgba(255, 255, 255, 0.85);
+      max-width: 560px;
+      background: rgba(255, 255, 255, 0.88);
       padding: 28px;
       border-radius: 28px;
       box-shadow: 0 15px 45px rgba(0, 0, 0, 0.18);
@@ -87,10 +88,12 @@
       display: none;
     }
 
-    .flower {
-      font-size: 100px;
-      margin-bottom: 18px;
-      animation: flowerPop 1s infinite alternate;
+    .finalText {
+      color: #d6336c;
+      font-size: 28px;
+      font-weight: bold;
+      margin-top: 10px;
+      margin-bottom: 10px;
     }
 
     .penguin {
@@ -100,20 +103,239 @@
       margin-top: 20px;
     }
 
-    .finalText {
-      color: #d6336c;
-      font-size: 28px;
-      font-weight: bold;
-      margin-top: 10px;
+    .bouquet-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 10px 0 18px;
     }
 
-    @keyframes flowerPop {
-      from {
-        transform: scale(1);
-      }
+    .bouquet {
+      position: relative;
+      width: 240px;
+      height: 280px;
+      animation: bouquetFloat 2.2s ease-in-out infinite;
+    }
 
-      to {
-        transform: scale(1.15);
+    .stem {
+      position: absolute;
+      width: 6px;
+      height: 120px;
+      background: linear-gradient(to bottom, #3fa34d, #2e7d32);
+      border-radius: 10px;
+      bottom: 75px;
+      transform-origin: bottom center;
+      z-index: 2;
+    }
+
+    .stem1 {
+      left: 76px;
+      transform: rotate(-18deg);
+    }
+
+    .stem2 {
+      left: 116px;
+      transform: rotate(0deg);
+      height: 130px;
+    }
+
+    .stem3 {
+      left: 154px;
+      transform: rotate(18deg);
+    }
+
+    .leaf {
+      position: absolute;
+      width: 24px;
+      height: 14px;
+      background: #49b35c;
+      border-radius: 24px 0 24px 0;
+      z-index: 2;
+    }
+
+    .leaf1 {
+      left: 58px;
+      bottom: 130px;
+      transform: rotate(-35deg);
+    }
+
+    .leaf2 {
+      left: 128px;
+      bottom: 125px;
+      transform: rotate(30deg);
+    }
+
+    .leaf3 {
+      left: 146px;
+      bottom: 100px;
+      transform: rotate(55deg);
+    }
+
+    .flower {
+      position: absolute;
+      width: 74px;
+      height: 74px;
+      z-index: 4;
+    }
+
+    .flower1 {
+      left: 40px;
+      top: 42px;
+      transform: rotate(-10deg);
+    }
+
+    .flower2 {
+      left: 84px;
+      top: 10px;
+      transform: scale(1.05);
+    }
+
+    .flower3 {
+      left: 126px;
+      top: 48px;
+      transform: rotate(10deg);
+    }
+
+    .petal {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      background: #ff8fbd;
+      border-radius: 50%;
+      box-shadow: inset 0 -4px 0 rgba(255, 255, 255, 0.25);
+    }
+
+    .flower2 .petal {
+      background: #ff78ac;
+    }
+
+    .flower3 .petal {
+      background: #ffa6c9;
+    }
+
+    .p1 { top: 0; left: 23px; }
+    .p2 { top: 18px; left: 0; }
+    .p3 { top: 18px; left: 46px; }
+    .p4 { top: 40px; left: 12px; }
+    .p5 { top: 40px; left: 34px; }
+
+    .center {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: #ffd54f;
+      border-radius: 50%;
+      top: 25px;
+      left: 25px;
+      z-index: 2;
+      box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.08);
+    }
+
+    .paper {
+      position: absolute;
+      bottom: 18px;
+      width: 110px;
+      height: 125px;
+      background: linear-gradient(to bottom, #f8e7cf, #efd7bb);
+      z-index: 3;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .paper.left {
+      left: 28px;
+      clip-path: polygon(0 0, 100% 18%, 76% 100%, 10% 100%);
+      transform: rotate(-8deg);
+      border-bottom-left-radius: 12px;
+    }
+
+    .paper.right {
+      right: 28px;
+      clip-path: polygon(0 18%, 100% 0, 90% 100%, 24% 100%);
+      transform: rotate(8deg);
+      border-bottom-right-radius: 12px;
+    }
+
+    .ribbon {
+      position: absolute;
+      width: 72px;
+      height: 18px;
+      background: #ff5f95;
+      bottom: 54px;
+      left: 84px;
+      border-radius: 14px;
+      z-index: 5;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .ribbon::before,
+    .ribbon::after {
+      content: "";
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: #ff6fa0;
+      top: -3px;
+      border-radius: 4px 16px 4px 16px;
+    }
+
+    .ribbon::before {
+      left: -10px;
+      transform: rotate(35deg);
+    }
+
+    .ribbon::after {
+      right: -10px;
+      transform: rotate(-35deg);
+    }
+
+    .sparkle {
+      position: absolute;
+      font-size: 18px;
+      color: #ffb347;
+      z-index: 6;
+      animation: twinkle 1.6s ease-in-out infinite;
+    }
+
+    .sparkle.s1 {
+      top: 18px;
+      left: 30px;
+    }
+
+    .sparkle.s2 {
+      top: 0;
+      right: 22px;
+      animation-delay: 0.4s;
+    }
+
+    .sparkle.s3 {
+      top: 40px;
+      right: 0;
+      animation-delay: 0.8s;
+    }
+
+    @keyframes bouquetFloat {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-6px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    @keyframes twinkle {
+      0% {
+        transform: scale(1);
+        opacity: 0.7;
+      }
+      50% {
+        transform: scale(1.25);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 0.7;
       }
     }
 
@@ -127,8 +349,8 @@
         padding: 12px 22px;
       }
 
-      .flower {
-        font-size: 80px;
+      .bouquet {
+        transform: scale(0.9);
       }
     }
   </style>
@@ -148,9 +370,54 @@
   </div>
 
   <div class="card hidden" id="finalScreen">
-    <div class="flower">🌸</div>
+    <div class="bouquet-wrap">
+      <div class="bouquet">
+        <div class="sparkle s1">✦</div>
+        <div class="sparkle s2">✦</div>
+        <div class="sparkle s3">✦</div>
 
-    <div class="finalText">Çiçek kabul edildi!</div>
+        <div class="stem stem1"></div>
+        <div class="stem stem2"></div>
+        <div class="stem stem3"></div>
+
+        <div class="leaf leaf1"></div>
+        <div class="leaf leaf2"></div>
+        <div class="leaf leaf3"></div>
+
+        <div class="flower flower1">
+          <span class="petal p1"></span>
+          <span class="petal p2"></span>
+          <span class="petal p3"></span>
+          <span class="petal p4"></span>
+          <span class="petal p5"></span>
+          <span class="center"></span>
+        </div>
+
+        <div class="flower flower2">
+          <span class="petal p1"></span>
+          <span class="petal p2"></span>
+          <span class="petal p3"></span>
+          <span class="petal p4"></span>
+          <span class="petal p5"></span>
+          <span class="center"></span>
+        </div>
+
+        <div class="flower flower3">
+          <span class="petal p1"></span>
+          <span class="petal p2"></span>
+          <span class="petal p3"></span>
+          <span class="petal p4"></span>
+          <span class="petal p5"></span>
+          <span class="center"></span>
+        </div>
+
+        <div class="paper left"></div>
+        <div class="paper right"></div>
+        <div class="ribbon"></div>
+      </div>
+    </div>
+
+    <div class="finalText">Çiçeğin geldi 🌷</div>
 
     <img src="penguen.gif" alt="Penguen" class="penguin">
   </div>
