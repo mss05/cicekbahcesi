@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hira için</title>
+  <title>Hira</title>
 
   <style>
     * {
@@ -11,16 +11,22 @@
     }
 
     :root {
-      --bg1: #fff7fb;
-      --bg2: #fff4df;
-      --card: rgba(255, 255, 255, 0.78);
+      --bg1: #f8f3f1;
+      --bg2: #efe5dc;
+      --card: rgba(255, 255, 255, 0.82);
       --card-border: rgba(255, 255, 255, 0.75);
-      --text: #30242d;
-      --muted: #7b6672;
-      --pink: #f45b92;
-      --pink-dark: #dd3f79;
-      --soft: #f3f0f2;
-      --shadow: 0 20px 60px rgba(78, 42, 58, 0.14);
+      --text: #3f2d38;
+      --muted: #8e7b86;
+      --pink: #ef6b9d;
+      --pink-dark: #df4d87;
+      --soft: #f2eef0;
+      --shadow: 0 22px 60px rgba(77, 48, 61, 0.12);
+      --green1: #4f9c52;
+      --green2: #2d6d34;
+      --paper1: #f6e4d3;
+      --paper2: #ead1bb;
+      --paper3: #fff6ef;
+      --gold: #f1c86c;
     }
 
     body {
@@ -28,26 +34,26 @@
       min-height: 100vh;
       font-family: "Segoe UI", Arial, sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(255, 202, 227, 0.4), transparent 30%),
-        radial-gradient(circle at top right, rgba(255, 227, 184, 0.45), transparent 35%),
+        radial-gradient(circle at top left, rgba(255, 217, 230, 0.35), transparent 25%),
+        radial-gradient(circle at top right, rgba(255, 236, 205, 0.42), transparent 28%),
         linear-gradient(135deg, var(--bg1), var(--bg2));
-      color: var(--text);
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 24px;
+      color: var(--text);
+      padding: 18px;
       overflow-x: hidden;
     }
 
     .card {
-      width: min(92vw, 760px);
+      width: min(92vw, 860px);
       background: var(--card);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
       border: 1px solid var(--card-border);
-      border-radius: 32px;
-      box-shadow: var(--shadow);
+      border-radius: 34px;
       padding: 28px 28px 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -58,92 +64,107 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.32), transparent 45%),
-        radial-gradient(circle at 20% 15%, rgba(255,255,255,0.55), transparent 18%);
+        linear-gradient(180deg, rgba(255,255,255,0.28), transparent 45%),
+        radial-gradient(circle at 18% 10%, rgba(255,255,255,0.4), transparent 16%);
       pointer-events: none;
     }
 
-    .top-badge {
-      display: inline-block;
-      margin-bottom: 16px;
-      padding: 10px 16px;
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 92px;
+      padding: 10px 20px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.8);
-      border: 1px solid rgba(0,0,0,0.05);
-      color: #7d5568;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(0,0,0,0.04);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.04);
       font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.2px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-    }
-
-    .signature {
-      margin-top: 18px;
-      font-size: 14px;
-      color: #8a7080;
-      font-weight: 600;
-      letter-spacing: 0.2px;
+      font-weight: 700;
+      color: #8c7480;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 2;
     }
 
     .banner {
       width: min(100%, 390px);
       border-radius: 24px;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.10);
       margin-bottom: 22px;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.12);
+      position: relative;
+      z-index: 2;
     }
 
     h1 {
-      font-size: clamp(28px, 4vw, 42px);
-      margin: 0 0 12px;
-      line-height: 1.1;
-      color: #3a2632;
+      margin: 0 0 14px;
+      font-size: clamp(36px, 5vw, 60px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: #43313b;
+      position: relative;
+      z-index: 2;
     }
 
     .sub {
-      margin: 0 0 28px;
+      margin: 0 auto 30px;
+      max-width: 620px;
+      font-size: clamp(16px, 2vw, 18px);
+      line-height: 1.55;
       color: var(--muted);
-      font-size: clamp(15px, 2vw, 18px);
-      line-height: 1.5;
+      position: relative;
+      z-index: 2;
     }
 
     .buttons {
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 16px;
       flex-wrap: wrap;
-      align-items: center;
       min-height: 90px;
+      position: relative;
+      z-index: 2;
     }
 
     button {
       border: none;
       border-radius: 18px;
-      padding: 15px 28px;
+      padding: 15px 30px;
       font-size: 19px;
       font-weight: 700;
       cursor: pointer;
-      transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+      transition: transform 0.25s ease, background 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease;
     }
 
     #yesBtn {
-      background: linear-gradient(135deg, var(--pink), #ff8ab3);
-      color: white;
-      box-shadow: 0 14px 28px rgba(244, 91, 146, 0.28);
+      background: linear-gradient(135deg, var(--pink), #ff93b8);
+      color: #fff;
+      box-shadow: 0 14px 28px rgba(239, 107, 157, 0.28);
       transform: scale(1);
     }
 
     #yesBtn:hover {
-      background: linear-gradient(135deg, var(--pink-dark), #ff749f);
+      background: linear-gradient(135deg, var(--pink-dark), #ff7da8);
     }
 
     #noBtn {
-      background: #f4f1f3;
-      color: #493942;
-      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+      background: #efebee;
+      color: #4b3d45;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
     }
 
     #noBtn:hover {
-      background: #ece7ea;
+      background: #e7e1e5;
+    }
+
+    .note {
+      margin-top: 26px;
+      font-size: 14px;
+      color: #9a8690;
+      font-weight: 600;
+      position: relative;
+      z-index: 2;
     }
 
     .hidden {
@@ -151,170 +172,266 @@
     }
 
     .final-title {
-      font-size: clamp(30px, 4.2vw, 46px);
-      margin: 8px 0 10px;
-      color: #3a2632;
+      margin: 8px 0 8px;
+      font-size: clamp(34px, 5vw, 60px);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: #43313b;
+      position: relative;
+      z-index: 2;
     }
 
     .final-sub {
-      margin: 0 0 18px;
-      color: #786572;
-      font-size: clamp(15px, 2vw, 18px);
+      margin: 0 auto 18px;
+      max-width: 600px;
+      font-size: clamp(16px, 2vw, 18px);
+      line-height: 1.5;
+      color: var(--muted);
+      position: relative;
+      z-index: 2;
     }
 
-    .garden-frame {
-      margin: 22px auto 18px;
-      width: min(100%, 670px);
-      height: 380px;
+    .bouquet-scene {
+      width: min(100%, 710px);
+      height: clamp(420px, 58vw, 590px);
+      margin: 24px auto 22px;
       position: relative;
-      border-radius: 28px;
+      border-radius: 34px;
       overflow: hidden;
       background:
-        radial-gradient(circle at 20% 10%, rgba(255,255,255,0.85), transparent 22%),
-        radial-gradient(circle at 80% 14%, rgba(255,255,255,0.7), transparent 18%),
-        linear-gradient(180deg, #fff8fd 0%, #fff3db 38%, #f7f7f7 100%);
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,0.82), transparent 18%),
+        radial-gradient(circle at 78% 14%, rgba(255,255,255,0.65), transparent 16%),
+        linear-gradient(180deg, #fff7f9 0%, #fff3e7 55%, #f5ebe6 100%);
       box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.7),
-        0 18px 38px rgba(103, 61, 76, 0.12);
+        inset 0 1px 0 rgba(255,255,255,0.65),
+        0 18px 44px rgba(92, 58, 70, 0.12);
+      position: relative;
+      z-index: 2;
     }
 
-    .sun {
+    .glow {
       position: absolute;
-      width: 86px;
-      height: 86px;
+      width: 240px;
+      height: 240px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #fffce8, #ffd992 68%, #ffc86f 100%);
-      top: 22px;
-      right: 30px;
-      box-shadow: 0 0 50px rgba(255, 215, 128, 0.45);
+      background: radial-gradient(circle, rgba(255,255,255,0.6), transparent 70%);
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 150px;
+      filter: blur(18px);
+      pointer-events: none;
     }
 
-    .cloud {
+    .spark {
       position: absolute;
-      background: rgba(255,255,255,0.86);
-      border-radius: 999px;
-      height: 28px;
-      width: 86px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+      color: #f2c45a;
+      font-size: 18px;
+      opacity: 0;
+      animation: sparkle 2.2s ease-in-out infinite;
+      z-index: 8;
     }
 
-    .cloud::before,
-    .cloud::after {
+    .spark.s1 { left: 26%; top: 18%; animation-delay: 0.3s; }
+    .spark.s2 { left: 39%; top: 11%; animation-delay: 0.8s; }
+    .spark.s3 { left: 61%; top: 13%; animation-delay: 1.2s; }
+    .spark.s4 { left: 73%; top: 22%; animation-delay: 1.6s; }
+    .spark.s5 { left: 48%; top: 24%; animation-delay: 2s; }
+
+    .bouquet {
+      position: absolute;
+      left: 50%;
+      bottom: 42px;
+      width: min(88%, 600px);
+      height: 480px;
+      transform: translateX(-50%);
+      z-index: 3;
+    }
+
+    .bouquet-core {
+      position: absolute;
+      inset: 0;
+    }
+
+    .paper-back-left,
+    .paper-back-right,
+    .paper-front-left,
+    .paper-front-right {
+      position: absolute;
+      bottom: 0;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.08));
+    }
+
+    .paper-back-left {
+      left: 70px;
+      width: 210px;
+      height: 280px;
+      background: linear-gradient(180deg, var(--paper3), #f2dfcf);
+      clip-path: polygon(50% 0%, 100% 92%, 12% 100%);
+      transform: rotate(-12deg);
+      z-index: 1;
+      opacity: 0.95;
+    }
+
+    .paper-back-right {
+      right: 70px;
+      width: 210px;
+      height: 280px;
+      background: linear-gradient(180deg, var(--paper3), #efdbca);
+      clip-path: polygon(50% 0%, 88% 100%, 0% 92%);
+      transform: rotate(12deg);
+      z-index: 1;
+      opacity: 0.95;
+    }
+
+    .paper-front-left {
+      left: 118px;
+      width: 175px;
+      height: 220px;
+      background: linear-gradient(180deg, var(--paper1), var(--paper2));
+      clip-path: polygon(50% 0%, 100% 100%, 8% 92%);
+      transform: rotate(-11deg);
+      z-index: 5;
+    }
+
+    .paper-front-right {
+      right: 118px;
+      width: 175px;
+      height: 220px;
+      background: linear-gradient(180deg, var(--paper1), var(--paper2));
+      clip-path: polygon(50% 0%, 92% 92%, 0% 100%);
+      transform: rotate(11deg);
+      z-index: 5;
+    }
+
+    .ribbon-wrap {
+      position: absolute;
+      left: 50%;
+      bottom: 98px;
+      transform: translateX(-50%);
+      z-index: 7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .ribbon {
+      position: relative;
+      min-width: 112px;
+      padding: 10px 22px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f38cae, #ea5f92);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      box-shadow: 0 10px 20px rgba(234, 95, 146, 0.25);
+    }
+
+    .ribbon::before,
+    .ribbon::after {
       content: "";
       position: absolute;
-      background: rgba(255,255,255,0.92);
-      border-radius: 50%;
+      top: 50%;
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, #f38cae, #ea5f92);
+      transform: translateY(-50%) rotate(45deg);
+      z-index: -1;
+      border-radius: 4px;
     }
 
-    .cloud::before {
-      width: 32px;
-      height: 32px;
-      left: 12px;
-      top: -12px;
+    .ribbon::before {
+      left: -8px;
     }
 
-    .cloud::after {
-      width: 40px;
-      height: 40px;
-      right: 10px;
-      top: -16px;
+    .ribbon::after {
+      right: -8px;
     }
 
-    .cloud.c1 { top: 38px; left: 46px; }
-    .cloud.c2 { top: 82px; left: 155px; transform: scale(0.8); }
-    .cloud.c3 { top: 58px; right: 142px; transform: scale(0.7); }
-
-    .sparkle {
-      position: absolute;
-      color: #ffd26f;
-      font-size: 16px;
-      animation: twinkle 2s ease-in-out infinite;
-      opacity: 0.88;
-    }
-
-    .s1 { top: 62px; left: 104px; }
-    .s2 { top: 128px; left: 230px; animation-delay: 0.5s; }
-    .s3 { top: 92px; right: 194px; animation-delay: 1s; }
-    .s4 { top: 150px; right: 84px; animation-delay: 0.2s; }
-
-    .hill-back,
-    .hill-front,
-    .grass {
-      position: absolute;
-      left: 0;
-      width: 100%;
-    }
-
-    .hill-back {
-      bottom: 90px;
-      height: 140px;
-      background: linear-gradient(180deg, #c7efbf, #9fd18d);
-      clip-path: ellipse(65% 100% at 50% 100%);
-    }
-
-    .hill-front {
-      bottom: 44px;
-      height: 170px;
-      background: linear-gradient(180deg, #a8d98f, #80bb68);
-      clip-path: ellipse(75% 100% at 50% 100%);
-    }
-
-    .grass {
-      bottom: 0;
-      height: 92px;
-      background: linear-gradient(180deg, #79b75f, #4d8f3d);
+    .ribbon-tail {
+      width: 12px;
+      height: 48px;
+      background: linear-gradient(180deg, #ef79a3, #de527f);
+      margin-top: -4px;
+      clip-path: polygon(0 0, 100% 0, 100% 84%, 50% 100%, 0 84%);
+      opacity: 0.95;
     }
 
     .flower {
       position: absolute;
-      bottom: 54px;
-      left: var(--x);
-      width: 90px;
-      height: calc(var(--h) + 80px);
-      transform: scale(var(--scale));
+      left: 50%;
+      bottom: 118px;
+      width: 78px;
+      height: 220px;
+      transform: translateX(-50%);
       transform-origin: bottom center;
-      animation: sway var(--speed) ease-in-out infinite;
+      z-index: 4;
+      opacity: 0;
+    }
+
+    .flower.grow {
+      animation: flowerAppear 0.55s ease forwards;
     }
 
     .stem {
       position: absolute;
-      bottom: 0;
       left: 50%;
-      width: 6px;
-      height: var(--h);
-      transform: translateX(-50%);
-      background: linear-gradient(180deg, #5ba54b, #2f7d31);
+      bottom: 0;
+      width: 5px;
+      height: var(--stem-h);
+      transform: translateX(-50%) scaleY(0);
+      transform-origin: bottom center;
+      background: linear-gradient(180deg, #5fad58, #2c6e33);
       border-radius: 999px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.06);
+    }
+
+    .flower.grow .stem {
+      animation: stemGrow 0.42s ease forwards;
+      animation-delay: var(--delay);
     }
 
     .leaf {
       position: absolute;
-      width: 24px;
+      width: 26px;
       height: 14px;
-      background: linear-gradient(135deg, #74c964, #48a149);
+      background: linear-gradient(135deg, #75c768, #49a04a);
       border-radius: 100% 0 100% 0;
-      box-shadow: inset 0 -1px 0 rgba(255,255,255,0.2);
+      opacity: 0;
+      box-shadow: inset 0 -1px 0 rgba(255,255,255,0.14);
     }
 
-    .leaf.l1 {
-      bottom: calc(var(--h) * 0.38);
+    .leaf1 {
       left: calc(50% - 22px);
-      transform: rotate(-35deg);
+      bottom: calc(var(--stem-h) * 0.34);
+      transform: rotate(-34deg) scale(0.2);
     }
 
-    .leaf.l2 {
-      bottom: calc(var(--h) * 0.56);
-      left: calc(50% + 2px);
-      transform: rotate(35deg) scaleX(-1);
+    .leaf2 {
+      left: calc(50% + 1px);
+      bottom: calc(var(--stem-h) * 0.56);
+      transform: rotate(140deg) scale(0.2);
+    }
+
+    .flower.grow .leaf {
+      animation: leafPop 0.32s ease forwards;
+      animation-delay: calc(var(--delay) + 0.18s);
     }
 
     .bloom {
       position: absolute;
-      bottom: calc(var(--h) - 2px);
       left: 50%;
-      transform: translateX(-50%);
+      bottom: calc(var(--stem-h) - 2px);
       width: 74px;
       height: 74px;
+      transform: translateX(-50%) scale(0.1);
+      transform-origin: center center;
+      opacity: 0;
+    }
+
+    .flower.grow .bloom {
+      animation: bloomOpen 0.36s ease forwards;
+      animation-delay: calc(var(--delay) + 0.28s);
     }
 
     .petal {
@@ -326,27 +443,27 @@
       box-shadow: inset 0 -3px 0 rgba(255,255,255,0.22);
     }
 
-    .p1 { top: 0; left: 23px; }
-    .p2 { top: 16px; left: 0; }
-    .p3 { top: 16px; left: 46px; }
-    .p4 { top: 39px; left: 12px; }
-    .p5 { top: 39px; left: 34px; }
+    .petal.p1 { top: 0; left: 23px; }
+    .petal.p2 { top: 16px; left: 0; }
+    .petal.p3 { top: 16px; left: 46px; }
+    .petal.p4 { top: 39px; left: 12px; }
+    .petal.p5 { top: 39px; left: 34px; }
 
     .center {
       position: absolute;
-      width: 23px;
-      height: 23px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       left: 50%;
       top: 50%;
-      transform: translate(-50%, -42%);
-      background: radial-gradient(circle at 30% 30%, #fff0a3, #ffc94b 72%, #f1ad00 100%);
-      box-shadow: inset 0 -2px 0 rgba(0,0,0,0.08);
+      transform: translate(-50%, -44%);
+      background: radial-gradient(circle at 35% 35%, #fff3be, #ffd15a 70%, #efb43d 100%);
+      box-shadow: inset 0 -2px 0 rgba(0,0,0,0.06);
     }
 
     .flower.tulip .bloom {
       width: 64px;
-      height: 72px;
+      height: 76px;
     }
 
     .flower.tulip .petal {
@@ -356,119 +473,173 @@
       background: var(--petal);
     }
 
-    .flower.tulip .p1 {
+    .flower.tulip .petal.p1 {
+      top: 3px;
       left: 20px;
-      top: 5px;
       z-index: 3;
     }
 
-    .flower.tulip .p2 {
-      left: 6px;
+    .flower.tulip .petal.p2 {
       top: 16px;
+      left: 7px;
       transform: rotate(-18deg);
     }
 
-    .flower.tulip .p3 {
-      left: 34px;
+    .flower.tulip .petal.p3 {
       top: 16px;
+      left: 33px;
       transform: rotate(18deg);
     }
 
-    .flower.tulip .p4,
-    .flower.tulip .p5,
+    .flower.tulip .petal.p4,
+    .flower.tulip .petal.p5,
     .flower.tulip .center {
       display: none;
     }
 
-    .mini-flower {
-      position: absolute;
-      bottom: 52px;
-      width: 34px;
-      height: 58px;
-      animation: swaySmall 3s ease-in-out infinite;
-    }
-
-    .mini-flower .mini-stem {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 4px;
-      height: 44px;
-      transform: translateX(-50%);
-      background: linear-gradient(180deg, #61b14f, #2d7a30);
-      border-radius: 999px;
-    }
-
-    .mini-flower .mini-bloom {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      width: 22px;
-      height: 22px;
-      transform: translateX(-50%);
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #fff2c3, #ffd67e 70%, #ffbf5b 100%);
-      box-shadow:
-        -10px 4px 0 0 var(--mini),
-        10px 4px 0 0 var(--mini),
-        0 12px 0 0 var(--mini),
-        0 -1px 0 0 var(--mini);
-    }
-
-    .m1 { left: 44px; --mini: #f9a7c5; animation-delay: 0.2s; }
-    .m2 { left: 118px; --mini: #f7c476; animation-delay: 1s; }
-    .m3 { left: 205px; --mini: #c7a5ff; animation-delay: 0.6s; }
-    .m4 { left: 314px; --mini: #ff9ca0; animation-delay: 1.4s; }
-    .m5 { right: 164px; --mini: #ffd27f; animation-delay: 0.8s; }
-    .m6 { right: 66px; --mini: #f8a3d8; animation-delay: 1.2s; }
-
     .penguin-wrap {
-      margin-top: 14px;
+      position: relative;
+      z-index: 2;
+      margin-top: 6px;
     }
 
     .penguin {
-      width: min(260px, 82%);
-      border-radius: 22px;
-      box-shadow: 0 14px 36px rgba(0,0,0,0.12);
+      width: min(260px, 72%);
+      border-radius: 24px;
+      box-shadow: 0 14px 32px rgba(0,0,0,0.11);
     }
 
-    @keyframes sway {
-      0%   { transform: scale(var(--scale)) rotate(-1.5deg); }
-      50%  { transform: scale(var(--scale)) rotate(1.8deg); }
-      100% { transform: scale(var(--scale)) rotate(-1.5deg); }
+    .final-sign {
+      margin-top: 18px;
+      font-size: 15px;
+      color: #9a8690;
+      font-weight: 700;
+      position: relative;
+      z-index: 2;
     }
 
-    @keyframes swaySmall {
-      0%   { transform: rotate(-2deg); }
-      50%  { transform: rotate(2deg); }
-      100% { transform: rotate(-2deg); }
+    @keyframes stemGrow {
+      from {
+        transform: translateX(-50%) scaleY(0);
+      }
+      to {
+        transform: translateX(-50%) scaleY(1);
+      }
     }
 
-    @keyframes twinkle {
-      0%   { transform: scale(0.9); opacity: 0.65; }
-      50%  { transform: scale(1.25); opacity: 1; }
-      100% { transform: scale(0.9); opacity: 0.65; }
+    @keyframes bloomOpen {
+      0% {
+        transform: translateX(-50%) scale(0.12);
+        opacity: 0;
+      }
+      70% {
+        transform: translateX(-50%) scale(1.08);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+      }
     }
 
-    @media (max-width: 700px) {
+    @keyframes leafPop {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes flowerAppear {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes sparkle {
+      0% {
+        opacity: 0;
+        transform: translateY(8px) scale(0.9);
+      }
+      35% {
+        opacity: 1;
+        transform: translateY(0) scale(1.12);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+      }
+    }
+
+    @media (max-width: 760px) {
       .card {
         padding: 22px 18px 20px;
       }
 
-      .garden-frame {
-        height: 320px;
+      .bouquet-scene {
+        height: 500px;
       }
 
-      .flower {
-        transform: scale(calc(var(--scale) * 0.86));
+      .bouquet {
+        width: 95%;
+        height: 420px;
+        bottom: 36px;
       }
 
-      .mini-flower {
-        transform: scale(0.9);
+      .paper-back-left,
+      .paper-back-right {
+        width: 180px;
+        height: 250px;
+      }
+
+      .paper-front-left,
+      .paper-front-right {
+        width: 145px;
+        height: 196px;
+      }
+
+      .paper-back-left { left: 42px; }
+      .paper-back-right { right: 42px; }
+      .paper-front-left { left: 86px; }
+      .paper-front-right { right: 86px; }
+
+      .ribbon-wrap {
+        bottom: 92px;
       }
     }
 
     @media (max-width: 520px) {
+      body {
+        padding: 10px;
+      }
+
+      .card {
+        width: 96vw;
+        border-radius: 28px;
+        padding: 18px 14px 18px;
+      }
+
+      .banner {
+        width: 100%;
+        max-width: 330px;
+        margin-bottom: 18px;
+      }
+
+      h1,
+      .final-title {
+        font-size: 30px;
+      }
+
+      .sub,
+      .final-sub {
+        font-size: 15px;
+        margin-bottom: 22px;
+      }
+
       .buttons {
         gap: 12px;
       }
@@ -478,37 +649,117 @@
         padding: 13px 22px;
       }
 
-      .garden-frame {
-        height: 280px;
+      .bouquet-scene {
+        height: 440px;
+        border-radius: 28px;
+      }
+
+      .bouquet {
+        width: 98%;
+        height: 370px;
+        bottom: 26px;
       }
 
       .flower {
-        transform: scale(calc(var(--scale) * 0.72));
+        width: 60px;
+        height: 190px;
+        bottom: 100px;
       }
 
-      .hill-back {
-        bottom: 78px;
+      .bloom {
+        width: 58px;
+        height: 58px;
       }
 
-      .hill-front {
-        bottom: 40px;
+      .petal {
+        width: 22px;
+        height: 22px;
       }
 
-      .mini-flower {
-        display: none;
+      .petal.p1 { top: 0; left: 18px; }
+      .petal.p2 { top: 12px; left: 0; }
+      .petal.p3 { top: 12px; left: 36px; }
+      .petal.p4 { top: 30px; left: 9px; }
+      .petal.p5 { top: 30px; left: 27px; }
+
+      .center {
+        width: 18px;
+        height: 18px;
+      }
+
+      .flower.tulip .bloom {
+        width: 52px;
+        height: 60px;
+      }
+
+      .flower.tulip .petal {
+        width: 20px;
+        height: 32px;
+      }
+
+      .flower.tulip .petal.p1 {
+        left: 16px;
+      }
+
+      .flower.tulip .petal.p2 {
+        left: 4px;
+      }
+
+      .flower.tulip .petal.p3 {
+        left: 28px;
+      }
+
+      .paper-back-left,
+      .paper-back-right {
+        width: 126px;
+        height: 180px;
+      }
+
+      .paper-front-left,
+      .paper-front-right {
+        width: 106px;
+        height: 145px;
+      }
+
+      .paper-back-left { left: 28px; }
+      .paper-back-right { right: 28px; }
+      .paper-front-left { left: 57px; }
+      .paper-front-right { right: 57px; }
+
+      .ribbon-wrap {
+        bottom: 76px;
+      }
+
+      .ribbon {
+        min-width: 92px;
+        padding: 8px 18px;
+        font-size: 16px;
+      }
+
+      .ribbon-tail {
+        height: 40px;
+      }
+
+      .penguin {
+        width: min(220px, 76%);
+      }
+
+      .final-sign {
+        font-size: 14px;
       }
     }
   </style>
 </head>
 <body>
+
   <div class="card" id="questionScreen">
-    <div class="top-badge">Hira için yapıldı</div>
+    <div class="pill">Hira</div>
 
     <img src="banner.gif" alt="Banner" class="banner" />
 
     <h1>Çiçeği kabul ediyor musun?</h1>
     <p class="sub">
-      Bu soru göründüğü kadar basit değil. “Hayır” demek serbest ama sistem pek desteklemiyor gibi.
+      Bu soru göründüğü kadar basit değil. “Hayır” demek serbest ama sistem bu fikri çok desteklemiyor gibi.
     </p>
 
     <div class="buttons">
@@ -516,177 +767,43 @@
       <button id="noBtn">Hayır</button>
     </div>
 
-    <div class="signature">Küçük bir not: Bu sayfa özel olarak Hira için hazırlandı.</div>
+    <div class="note">Ufak ama önemli bir soru.</div>
   </div>
 
   <div class="card hidden" id="finalScreen">
-    <div class="top-badge">Hira için yapıldı</div>
+    <h2 class="final-title">Bir demet değil, direkt buket</h2>
+    <p class="final-sub">Madem kabul edildi, özen belli olsun dedik.</p>
 
-    <h2 class="final-title">Bir demet değil, direkt bahçe 🌷</h2>
-    <p class="final-sub">
-      Madem kabul edildi, o zaman biraz özen belli olsun dedik.
-    </p>
+    <div class="bouquet-scene">
+      <div class="glow"></div>
 
-    <div class="garden-frame">
-      <div class="sun"></div>
+      <div class="spark s1">✦</div>
+      <div class="spark s2">✦</div>
+      <div class="spark s3">✦</div>
+      <div class="spark s4">✦</div>
+      <div class="spark s5">✦</div>
 
-      <div class="cloud c1"></div>
-      <div class="cloud c2"></div>
-      <div class="cloud c3"></div>
+      <div class="bouquet" id="bouquetArea">
+        <div class="paper-back-left"></div>
+        <div class="paper-back-right"></div>
 
-      <div class="sparkle s1">✦</div>
-      <div class="sparkle s2">✦</div>
-      <div class="sparkle s3">✦</div>
-      <div class="sparkle s4">✦</div>
+        <div class="bouquet-core" id="flowerLayer"></div>
 
-      <div class="hill-back"></div>
-      <div class="hill-front"></div>
+        <div class="paper-front-left"></div>
+        <div class="paper-front-right"></div>
 
-      <div class="flower" style="--x: 28px; --h: 122px; --scale: 0.88; --speed: 3.8s; --petal: #ff8cb8;">
-        <div class="stem"></div>
-        <div class="leaf l1"></div>
-        <div class="leaf l2"></div>
-        <div class="bloom">
-          <span class="petal p1"></span>
-          <span class="petal p2"></span>
-          <span class="petal p3"></span>
-          <span class="petal p4"></span>
-          <span class="petal p5"></span>
-          <span class="center"></span>
+        <div class="ribbon-wrap">
+          <div class="ribbon">Hira</div>
+          <div class="ribbon-tail"></div>
         </div>
       </div>
-
-      <div class="flower tulip" style="--x: 94px; --h: 138px; --scale: 1.02; --speed: 4s; --petal: #ff6e96;">
-        <div class="stem"></div>
-        <div class="leaf l1"></div>
-        <div class="leaf l2"></div>
-        <div class="bloom">
-          <span class="petal p1"></span>
-          <span class="petal p2"></span>
-          <span class="petal p3"></span>
-          <span class="petal p4"></span>
-          <span class="petal p5"></span>
-          <span class="center"></span>
-        </div>
-      </div>
-
-      <div class="flower" style="--x: 160px; --h: 156px; --scale: 1.16; --speed: 4.8s; --petal: #f7a6c8;">
-        <div class="stem"></div>
-        <div class="leaf l1"></div>
-        <div class="leaf l2"></div>
-        <div class="bloom">
-          <span class="petal p1"></span>
-          <span class="petal p2"></span>
-          <span class="petal p3"></span>
-          <span class="petal p4"></span>
-          <span class="petal p5"></span>
-          <span class="center"></span>
-        </div>
-      </div>
-
-      <div class="flower tulip" style="--x: 238px; --h: 176px; --scale: 1.26; --speed: 4.2s; --petal: #ff7ca6;">
-        <div class="stem"></div>
-        <div class="leaf l1"></div>
-        <div class="leaf l2"></div>
-        <div class="bloom">
-          <span class="petal p1"></span>
-          <span class="petal p2"></span>
-          <span class="petal p3"></span>
-          <span class="petal p4"></span>
-          <span class="petal p5"></span>
-          <span class="center"></span>
-        </div>
-      </div>
-
-      <div class="flower" style="--x: 322px; --h: 146px; --scale: 1.05; --speed: 4.6s; --petal: #ffbf8b;">
-        <div class="stem"></div>
-        <div class="leaf l1"></div>
-        <div class="leaf l2"></div>
-        <div class="bloom">
-          <span class="petal p1"></span>
-          <span class="petal p2"></span>
-          <span class="petal p3"></span>
-          <span class="petal p4"></span>
-          <span class="petal p5"></span>
-          <span class="center"></span>
-        </div>
-      </div>
-
-      <div class="flower" style="--x: 408px; --h: 164px; --scale: 1.18; --speed: 5s; --petal: #d3a8ff;">
-        <div class="stem"></div>
-        <div class="leaf l1"></div>
-        <div class="leaf l2"></div>
-        <div class="bloom">
-          <span class="petal p1"></span>
-          <span class="petal p2"></span>
-          <span class="petal p3"></span>
-          <span class="petal p4"></span>
-          <span class="petal p5"></span>
-          <span class="center"></span>
-        </div>
-      </div>
-
-      <div class="flower tulip" style="--x: 492px; --h: 138px; --scale: 1.03; --speed: 4.1s; --petal: #ff7894;">
-        <div class="stem"></div>
-        <div class="leaf l1"></div>
-        <div class="leaf l2"></div>
-        <div class="bloom">
-          <span class="petal p1"></span>
-          <span class="petal p2"></span>
-          <span class="petal p3"></span>
-          <span class="petal p4"></span>
-          <span class="petal p5"></span>
-          <span class="center"></span>
-        </div>
-      </div>
-
-      <div class="flower" style="--x: 566px; --h: 120px; --scale: 0.9; --speed: 4.4s; --petal: #ff9fc4;">
-        <div class="stem"></div>
-        <div class="leaf l1"></div>
-        <div class="leaf l2"></div>
-        <div class="bloom">
-          <span class="petal p1"></span>
-          <span class="petal p2"></span>
-          <span class="petal p3"></span>
-          <span class="petal p4"></span>
-          <span class="petal p5"></span>
-          <span class="center"></span>
-        </div>
-      </div>
-
-      <div class="mini-flower m1">
-        <div class="mini-stem"></div>
-        <div class="mini-bloom"></div>
-      </div>
-      <div class="mini-flower m2">
-        <div class="mini-stem"></div>
-        <div class="mini-bloom"></div>
-      </div>
-      <div class="mini-flower m3">
-        <div class="mini-stem"></div>
-        <div class="mini-bloom"></div>
-      </div>
-      <div class="mini-flower m4">
-        <div class="mini-stem"></div>
-        <div class="mini-bloom"></div>
-      </div>
-      <div class="mini-flower m5">
-        <div class="mini-stem"></div>
-        <div class="mini-bloom"></div>
-      </div>
-      <div class="mini-flower m6">
-        <div class="mini-stem"></div>
-        <div class="mini-bloom"></div>
-      </div>
-
-      <div class="grass"></div>
     </div>
 
     <div class="penguin-wrap">
       <img src="penguen.gif" alt="Penguen" class="penguin" />
     </div>
 
-    <div class="signature">Hira için yapıldı ✿</div>
+    <div class="final-sign">Hira için yapıldı ✿</div>
   </div>
 
   <script>
@@ -694,17 +811,19 @@
     const noBtn = document.getElementById("noBtn");
     const questionScreen = document.getElementById("questionScreen");
     const finalScreen = document.getElementById("finalScreen");
+    const flowerLayer = document.getElementById("flowerLayer");
 
     let noClickCount = 0;
     let yesScale = 1;
+    let bouquetBuilt = false;
 
     const noMessages = [
       "Emin misin?",
       "Bir daha düşün",
-      "Bence tekrar bak",
-      "Evet seçeneği gayet mantıklı",
-      "Kaçış alanın daralıyor",
-      "Son kararın mı gerçekten?",
+      "Bence evet daha iyi",
+      "Hayır çok da mantıklı gelmiyor",
+      "Sistem eveti destekliyor",
+      "Son şans",
       "Artık evet zorunlu"
     ];
 
@@ -717,20 +836,98 @@
       noBtn.textContent = noMessages[Math.min(noClickCount - 1, noMessages.length - 1)];
 
       if (noClickCount >= 4) {
-        noBtn.style.transform = "scale(0.82)";
+        noBtn.style.transform = "scale(0.85)";
         noBtn.style.opacity = "0.9";
       }
 
       if (noClickCount >= 6) {
         noBtn.style.display = "none";
         yesBtn.textContent = "Evet demek zorundasın";
-        yesBtn.style.transform = "scale(2.1)";
+        yesBtn.style.transform = "scale(2.05)";
       }
     });
 
     yesBtn.addEventListener("click", function () {
       questionScreen.classList.add("hidden");
       finalScreen.classList.remove("hidden");
+
+      if (!bouquetBuilt) {
+        buildBouquet();
+        bouquetBuilt = true;
+      }
+    });
+
+    function buildBouquet() {
+      const isMobile = window.innerWidth <= 520;
+
+      const flowers = [
+        { x: 6,  y: 8,  scale: 0.78, type: "daisy", color: "#f7a4c6", stem: 116 },
+        { x: 13, y: 12, scale: 0.84, type: "tulip", color: "#ef6f97", stem: 130 },
+        { x: 19, y: 18, scale: 0.90, type: "daisy", color: "#ffd08f", stem: 144 },
+        { x: 25, y: 13, scale: 0.98, type: "rose",  color: "#f08bb4", stem: 156 },
+        { x: 31, y: 21, scale: 0.86, type: "daisy", color: "#cda7ff", stem: 138 },
+        { x: 37, y: 9,  scale: 1.04, type: "tulip", color: "#ff88a9", stem: 176 },
+        { x: 43, y: 19, scale: 0.90, type: "daisy", color: "#f4b27b", stem: 146 },
+        { x: 49, y: 5,  scale: 1.14, type: "rose",  color: "#f36f9c", stem: 190 },
+        { x: 55, y: 17, scale: 0.94, type: "daisy", color: "#ffc98a", stem: 152 },
+        { x: 61, y: 8,  scale: 1.06, type: "tulip", color: "#ff7c9e", stem: 178 },
+        { x: 67, y: 19, scale: 0.92, type: "daisy", color: "#d5a8ff", stem: 150 },
+        { x: 73, y: 14, scale: 0.88, type: "rose",  color: "#f7a0c2", stem: 138 },
+
+        { x: 10, y: 26, scale: 0.76, type: "daisy", color: "#ffb6cb", stem: 110 },
+        { x: 18, y: 29, scale: 0.80, type: "daisy", color: "#ffe1a0", stem: 118 },
+        { x: 27, y: 31, scale: 0.78, type: "tulip", color: "#ef8bb1", stem: 112 },
+        { x: 35, y: 27, scale: 0.82, type: "daisy", color: "#f8bb85", stem: 120 },
+        { x: 44, y: 33, scale: 0.76, type: "daisy", color: "#f39bb7", stem: 106 },
+        { x: 53, y: 29, scale: 0.82, type: "tulip", color: "#ff8ca6", stem: 116 },
+        { x: 61, y: 32, scale: 0.78, type: "daisy", color: "#c8a4ff", stem: 110 },
+        { x: 69, y: 28, scale: 0.82, type: "daisy", color: "#ffd38f", stem: 118 },
+        { x: 77, y: 25, scale: 0.74, type: "tulip", color: "#f58db2", stem: 104 },
+        { x: 84, y: 30, scale: 0.72, type: "daisy", color: "#ffb8cc", stem: 98 }
+      ];
+
+      flowerLayer.innerHTML = "";
+
+      flowers.forEach((f, index) => {
+        const flower = document.createElement("div");
+        flower.className = "flower " + (f.type === "tulip" ? "tulip" : "");
+        flower.style.left = f.x + "%";
+        flower.style.bottom = (isMobile ? 88 : 118) + "px";
+        flower.style.setProperty("--stem-h", (isMobile ? Math.round(f.stem * 0.78) : f.stem) + "px");
+        flower.style.setProperty("--petal", f.color);
+        flower.style.setProperty("--delay", (index * 0.07) + "s");
+
+        const yOffset = isMobile ? Math.round(f.y * 0.8) : f.y;
+        const scale = isMobile ? (f.scale * 0.88).toFixed(2) : f.scale.toFixed(2);
+
+        flower.style.transform =
+          "translateX(-50%) translateY(" + yOffset + "px) scale(" + scale + ")";
+
+        flower.innerHTML = `
+          <div class="stem"></div>
+          <div class="leaf leaf1"></div>
+          <div class="leaf leaf2"></div>
+          <div class="bloom">
+            <span class="petal p1"></span>
+            <span class="petal p2"></span>
+            <span class="petal p3"></span>
+            <span class="petal p4"></span>
+            <span class="petal p5"></span>
+            <span class="center"></span>
+          </div>
+        `;
+
+        flowerLayer.appendChild(flower);
+
+        requestAnimationFrame(() => {
+          flower.classList.add("grow");
+        });
+      });
+    }
+
+    window.addEventListener("resize", function () {
+      if (!questionScreen.classList.contains("hidden") || !bouquetBuilt) return;
+      buildBouquet();
     });
   </script>
 </body>
