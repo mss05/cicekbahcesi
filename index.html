@@ -3,8 +3,242 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Hira</title>
-  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 15% 10%, rgba(255, 225, 235, 0.55), transparent 28%),
+        radial-gradient(circle at 85% 15%, rgba(255, 238, 205, 0.6), transparent 32%),
+        linear-gradient(135deg, #f8f0ee, #efe3da);
+      color: #3f2d38;
+      overflow-x: hidden;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .question-screen {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .question-card {
+      width: min(92vw, 760px);
+      padding: 30px 26px 28px;
+      border-radius: 34px;
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      box-shadow: 0 28px 70px rgba(70, 45, 55, 0.14);
+      text-align: center;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .hira-pill {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 92px;
+      padding: 10px 22px;
+      margin-bottom: 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      color: #8d7480;
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+    }
+
+    .banner {
+      display: block;
+      width: min(100%, 390px);
+      margin: 0 auto 24px;
+      border-radius: 24px;
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.13);
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      color: #43313b;
+    }
+
+    .question-text {
+      max-width: 610px;
+      margin: 0 auto 30px;
+      color: #8f7c86;
+      font-size: clamp(16px, 2vw, 18px);
+      line-height: 1.55;
+    }
+
+    .buttons {
+      min-height: 96px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: 0;
+      border-radius: 18px;
+      padding: 15px 31px;
+      font-size: 19px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.25s ease, opacity 0.25s ease, background 0.25s ease;
+    }
+
+    #yesBtn {
+      color: white;
+      background: linear-gradient(135deg, #f35f98, #ff9ab8);
+      box-shadow: 0 16px 30px rgba(243, 95, 152, 0.28);
+      transform: scale(1);
+      z-index: 3;
+    }
+
+    #noBtn {
+      color: #493b43;
+      background: #efebee;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.05);
+      z-index: 2;
+    }
+
+    .final-screen {
+      position: relative;
+      width: 100vw;
+      min-height: 100vh;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .flowers-frame {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      z-index: 1;
+    }
+
+    .final-copy {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      text-align: center;
+      color: rgba(255, 244, 249, 0.96);
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      width: min(92vw, 700px);
+      pointer-events: none;
+    }
+
+    .final-copy h2 {
+      margin: 0 0 6px;
+      font-size: clamp(28px, 4.2vw, 52px);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      font-weight: 900;
+    }
+
+    .final-copy p {
+      margin: 0;
+      color: rgba(255, 230, 239, 0.8);
+      font-size: clamp(15px, 2vw, 18px);
+    }
+
+    .penguin {
+      position: fixed;
+      left: 50%;
+      bottom: 46px;
+      transform: translateX(-50%);
+      width: min(210px, 54vw);
+      max-height: 170px;
+      object-fit: contain;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.36);
+      z-index: 6;
+    }
+
+    .final-sign {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      z-index: 7;
+      color: rgba(255, 224, 235, 0.82);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      text-align: center;
+    }
+
+    @media (max-width: 700px) {
+      .question-screen {
+        padding: 12px;
+      }
+
+      .question-card {
+        width: 96vw;
+        border-radius: 28px;
+        padding: 22px 16px 20px;
+      }
+
+      .banner {
+        max-width: 330px;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      .question-text {
+        font-size: 15px;
+        margin-bottom: 22px;
+      }
+
+      button {
+        font-size: 17px;
+        padding: 13px 22px;
+      }
+
+      .final-copy {
+        top: 22px;
+      }
+
+      .penguin {
+        width: min(180px, 58vw);
+        bottom: 42px;
+      }
+
+      .final-sign {
+        bottom: 16px;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -28,48 +262,27 @@
   </section>
 
   <section class="final-screen hidden" id="finalScreen">
-    <div class="night"></div>
-    <div class="stars"></div>
+    <iframe id="flowersFrame" class="flowers-frame" title="Hira flowers"></iframe>
 
-    <div class="final-content">
-      <div class="final-title">
-        <h2>Madem kabul edildi,</h2>
-        <p>özen belli olsun dedik.</p>
-      </div>
-
-      <div class="bouquet-scene">
-        <div class="moon-glow"></div>
-        <div class="fireflies">
-          <span></span><span></span><span></span><span></span><span></span><span></span>
-        </div>
-
-        <div class="bouquet" id="bouquet">
-          <div class="flower-layer" id="flowerLayer"></div>
-
-          <div class="wrap wrap-left"></div>
-          <div class="wrap wrap-right"></div>
-          <div class="wrap wrap-front"></div>
-
-          <div class="ribbon">Hira</div>
-        </div>
-      </div>
-
-      <img src="penguen.gif" alt="Penguen" class="penguin" />
-
-      <div class="final-sign">Hira için yapıldı</div>
+    <div class="final-copy">
+      <h2>Madem kabul edildi,</h2>
+      <p>özen belli olsun dedik.</p>
     </div>
+
+    <img src="penguen.gif" alt="Penguen" class="penguin" />
+
+    <div class="final-sign">Hira için yapıldı</div>
   </section>
 
   <script>
     const questionScreen = document.getElementById("questionScreen");
     const finalScreen = document.getElementById("finalScreen");
+    const flowersFrame = document.getElementById("flowersFrame");
     const yesBtn = document.getElementById("yesBtn");
     const noBtn = document.getElementById("noBtn");
-    const flowerLayer = document.getElementById("flowerLayer");
 
     let noCount = 0;
     let yesScale = 1;
-    let bouquetBuilt = false;
 
     const noMessages = [
       "Emin misin?",
@@ -104,85 +317,8 @@
       questionScreen.classList.add("hidden");
       finalScreen.classList.remove("hidden");
 
-      if (!bouquetBuilt) {
-        createBouquet();
-        bouquetBuilt = true;
-      }
+      flowersFrame.src = "flowers.html?v=" + Date.now();
     });
-
-    function createBouquet() {
-      const flowers = [
-        { x: 11, y: 72, r: -34, s: .72, h: 210, c1: "#ff6fa3", c2: "#ffc7dc", z: 4 },
-        { x: 17, y: 28, r: -28, s: .88, h: 265, c1: "#ff7ead", c2: "#ffd2e3", z: 5 },
-        { x: 22, y: 92, r: -24, s: .62, h: 180, c1: "#ff9abc", c2: "#ffe0eb", z: 8 },
-        { x: 27, y: 12, r: -20, s: .98, h: 305, c1: "#f85d96", c2: "#ffc2d8", z: 6 },
-        { x: 32, y: 74, r: -16, s: .74, h: 220, c1: "#ff8fb5", c2: "#ffdae6", z: 9 },
-        { x: 36, y: 36, r: -12, s: .86, h: 270, c1: "#ff6b9f", c2: "#ffd0e0", z: 7 },
-        { x: 40, y: 105, r: -8, s: .58, h: 165, c1: "#ffabc7", c2: "#ffe6ef", z: 10 },
-        { x: 44, y: -16, r: -5, s: 1.08, h: 340, c1: "#ff5f98", c2: "#ffc6da", z: 8 },
-        { x: 48, y: 82, r: -2, s: .68, h: 205, c1: "#ff86b0", c2: "#ffdae7", z: 11 },
-        { x: 52, y: 22, r: 3, s: .95, h: 295, c1: "#f7659c", c2: "#ffd0df", z: 9 },
-        { x: 56, y: 102, r: 7, s: .58, h: 168, c1: "#ff9fbe", c2: "#ffe3ed", z: 10 },
-        { x: 60, y: 46, r: 11, s: .82, h: 252, c1: "#ff76a7", c2: "#ffd4e2", z: 7 },
-        { x: 65, y: 86, r: 16, s: .68, h: 205, c1: "#ff94b8", c2: "#ffe0ea", z: 9 },
-        { x: 70, y: 18, r: 21, s: .93, h: 288, c1: "#ff6fa3", c2: "#ffcfe0", z: 6 },
-        { x: 76, y: 74, r: 28, s: .70, h: 215, c1: "#ffa7c4", c2: "#ffe6ee", z: 8 },
-        { x: 82, y: 38, r: 33, s: .78, h: 248, c1: "#ff7ead", c2: "#ffd7e5", z: 5 },
-
-        { x: 24, y: 128, r: -22, s: .48, h: 130, c1: "#ffb0ca", c2: "#ffe9f0", z: 13 },
-        { x: 31, y: 138, r: -15, s: .46, h: 118, c1: "#ff8eb4", c2: "#ffdeea", z: 14 },
-        { x: 39, y: 146, r: -8, s: .44, h: 108, c1: "#ff73a5", c2: "#ffd5e3", z: 15 },
-        { x: 58, y: 146, r: 8, s: .44, h: 108, c1: "#ff80ad", c2: "#ffdbe7", z: 15 },
-        { x: 66, y: 138, r: 16, s: .46, h: 118, c1: "#ff9fbe", c2: "#ffe3ed", z: 14 },
-        { x: 73, y: 128, r: 24, s: .48, h: 130, c1: "#ff88b1", c2: "#ffdeea", z: 13 }
-      ];
-
-      flowerLayer.innerHTML = "";
-
-      flowers.forEach((f, index) => {
-        const flower = document.createElement("div");
-        flower.className = "flower";
-
-        flower.style.setProperty("--x", f.x + "%");
-        flower.style.setProperty("--y", f.y + "px");
-        flower.style.setProperty("--r", f.r + "deg");
-        flower.style.setProperty("--s", f.s);
-        flower.style.setProperty("--h", f.h + "px");
-        flower.style.setProperty("--c1", f.c1);
-        flower.style.setProperty("--c2", f.c2);
-        flower.style.setProperty("--delay", index * 0.085 + "s");
-        flower.style.setProperty("--z", f.z);
-
-        flower.innerHTML = `
-          <div class="stem">
-            <span class="stem-light"></span>
-          </div>
-
-          <div class="leaf leaf-one"></div>
-          <div class="leaf leaf-two"></div>
-          <div class="leaf leaf-three"></div>
-
-          <div class="bloom">
-            <div class="petal petal-one"></div>
-            <div class="petal petal-two"></div>
-            <div class="petal petal-three"></div>
-            <div class="petal petal-four"></div>
-            <div class="petal petal-five"></div>
-            <div class="petal petal-six"></div>
-            <div class="center"></div>
-            <div class="flower-light light-one"></div>
-            <div class="flower-light light-two"></div>
-            <div class="flower-light light-three"></div>
-          </div>
-        `;
-
-        flowerLayer.appendChild(flower);
-
-        requestAnimationFrame(() => {
-          flower.classList.add("grow");
-        });
-      });
-    }
   </script>
 </body>
 </html>
