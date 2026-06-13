@@ -43,7 +43,7 @@
       width: min(92vw, 760px);
       padding: 30px 26px 28px;
       border-radius: 34px;
-      background: rgba(255, 255, 255, 0.86);
+      background: rgba(255, 255, 255, 0.88);
       border: 1px solid rgba(255, 255, 255, 0.75);
       box-shadow: 0 28px 70px rgba(70, 45, 55, 0.14);
       text-align: center;
@@ -59,7 +59,7 @@
       padding: 10px 22px;
       margin-bottom: 18px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.76);
+      background: rgba(255, 255, 255, 0.78);
       border: 1px solid rgba(0, 0, 0, 0.04);
       color: #8d7480;
       font-size: 14px;
@@ -126,39 +126,65 @@
     }
 
     .final-screen {
-      position: relative;
-      width: 100vw;
       min-height: 100vh;
+      position: relative;
       overflow: hidden;
-      background: #000;
+      background:
+        radial-gradient(circle at 50% 28%, rgba(24, 130, 135, 0.28), transparent 32%),
+        radial-gradient(circle at 48% 58%, rgba(255, 89, 151, 0.13), transparent 34%),
+        linear-gradient(180deg, #071516 0%, #020606 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 28px 12px 18px;
     }
 
-    .flowers-frame {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-      z-index: 1;
-      background: #000;
-    }
-
-    .final-copy {
-      position: fixed;
-      top: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 5;
-      text-align: center;
-      color: rgba(255, 244, 249, 0.96);
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-      width: min(92vw, 700px);
+    .stars,
+    .stars::before,
+    .stars::after {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background-repeat: repeat;
       pointer-events: none;
     }
 
+    .stars {
+      background-image:
+        radial-gradient(circle, rgba(126, 245, 255, 0.95) 0 1px, transparent 1.7px),
+        radial-gradient(circle, rgba(255, 238, 93, 0.9) 0 1px, transparent 1.8px);
+      background-size: 74px 74px, 132px 132px;
+      opacity: 0.38;
+      animation: starDrift 36s linear infinite;
+    }
+
+    .stars::before {
+      background-image: radial-gradient(circle, rgba(175, 255, 250, 0.78) 0 1px, transparent 1.6px);
+      background-size: 42px 42px;
+      opacity: 0.24;
+      animation: starDrift 48s linear infinite reverse;
+    }
+
+    .stars::after {
+      background-image: radial-gradient(circle, rgba(255, 241, 110, 0.75) 0 1.4px, transparent 2px);
+      background-size: 160px 160px;
+      opacity: 0.28;
+      animation: starDrift 60s linear infinite;
+    }
+
+    .final-copy {
+      position: relative;
+      z-index: 20;
+      text-align: center;
+      color: rgba(255, 244, 249, 0.96);
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      margin-bottom: 6px;
+    }
+
     .final-copy h2 {
-      margin: 0 0 6px;
-      font-size: clamp(28px, 4.2vw, 52px);
+      margin: 0 0 7px;
+      font-size: clamp(28px, 4.4vw, 54px);
       line-height: 1.05;
       letter-spacing: -0.04em;
       font-weight: 900;
@@ -166,30 +192,292 @@
 
     .final-copy p {
       margin: 0;
-      color: rgba(255, 230, 239, 0.8);
+      color: rgba(255, 230, 239, 0.82);
       font-size: clamp(15px, 2vw, 18px);
     }
 
-    .penguin {
-      position: fixed;
+    .flower-stage {
+      position: relative;
+      z-index: 10;
+      width: min(96vw, 920px);
+      height: clamp(520px, 72vw, 650px);
+      margin-top: 0;
+      filter: drop-shadow(0 26px 52px rgba(0, 0, 0, 0.44));
+    }
+
+    .glow {
+      position: absolute;
       left: 50%;
-      bottom: 46px;
+      top: 42%;
+      width: 430px;
+      height: 430px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(255, 105, 165, 0.22), transparent 58%),
+        radial-gradient(circle, rgba(31, 219, 218, 0.12), transparent 72%);
+      filter: blur(18px);
+      z-index: 1;
+    }
+
+    .bouquet {
+      position: absolute;
+      left: 50%;
+      bottom: 36px;
+      width: min(94%, 760px);
+      height: 560px;
       transform: translateX(-50%);
+      z-index: 5;
+    }
+
+    .flower {
+      position: absolute;
+      left: var(--x);
+      bottom: 112px;
+      width: 104px;
+      height: calc(var(--h) + 120px);
+      transform:
+        translateX(-50%)
+        translateY(var(--y))
+        rotate(var(--r))
+        scale(var(--s));
+      transform-origin: bottom center;
+      opacity: 0;
+      z-index: var(--z);
+    }
+
+    .final-screen.show .flower {
+      animation: flowerFade 0.3s ease forwards;
+      animation-delay: var(--delay);
+    }
+
+    .stem {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 9px;
+      height: var(--h);
+      border-radius: 999px;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.28), transparent 38%),
+        linear-gradient(180deg, #35e7de 0%, #0a8680 78%, #075150 100%);
+      transform: translateX(-50%) scaleY(0);
+      transform-origin: bottom center;
+      box-shadow:
+        0 0 16px rgba(44, 231, 224, 0.2),
+        inset 0 0 4px rgba(255, 255, 255, 0.14);
+    }
+
+    .final-screen.show .stem {
+      animation: stemGrow 0.78s cubic-bezier(.16,.82,.29,1.1) forwards;
+      animation-delay: calc(var(--delay) + 0.05s);
+    }
+
+    .leaf {
+      position: absolute;
+      width: 58px;
+      height: 28px;
+      border-radius: 100% 0 100% 0;
+      background:
+        radial-gradient(circle at 28% 30%, rgba(255, 255, 255, 0.22), transparent 36%),
+        linear-gradient(135deg, #2ee2d5, #087875);
+      opacity: 0;
+      filter: drop-shadow(0 8px 9px rgba(0, 0, 0, 0.24));
+    }
+
+    .leaf-one {
+      left: calc(50% - 55px);
+      bottom: calc(var(--h) * 0.30);
+      transform: rotate(-34deg) scale(0.1);
+    }
+
+    .leaf-two {
+      left: calc(50% + 2px);
+      bottom: calc(var(--h) * 0.46);
+      transform: rotate(138deg) scale(0.1);
+    }
+
+    .leaf-three {
+      left: calc(50% - 54px);
+      bottom: calc(var(--h) * 0.64);
+      transform: rotate(-31deg) scale(0.1);
+    }
+
+    .final-screen.show .leaf {
+      animation: leafOpen 0.55s ease forwards;
+      animation-delay: calc(var(--delay) + 0.46s);
+    }
+
+    .bloom {
+      position: absolute;
+      left: 50%;
+      bottom: calc(var(--h) - 8px);
+      width: 108px;
+      height: 100px;
+      transform: translateX(-50%) scale(0.02);
+      opacity: 0;
+      filter:
+        drop-shadow(0 0 16px rgba(255, 132, 184, 0.34))
+        drop-shadow(0 10px 12px rgba(0, 0, 0, 0.28));
+    }
+
+    .final-screen.show .bloom {
+      animation: bloomOpen 0.78s cubic-bezier(.18,.89,.32,1.34) forwards;
+      animation-delay: calc(var(--delay) + 0.72s);
+    }
+
+    .petal {
+      position: absolute;
+      left: 50%;
+      top: 53%;
+      width: 36px;
+      height: 62px;
+      border-radius: 50% 50% 46% 46%;
+      background:
+        radial-gradient(circle at 35% 20%, rgba(255, 255, 255, 0.66), transparent 28%),
+        linear-gradient(180deg, var(--c2), var(--c1) 76%);
+      transform-origin: 50% 88%;
+      box-shadow:
+        inset 0 -7px 10px rgba(151, 37, 84, 0.12),
+        inset 0 2px 4px rgba(255, 255, 255, 0.28);
+    }
+
+    .petal-one { transform: translate(-50%, -88%) rotate(0deg); }
+    .petal-two { transform: translate(-50%, -88%) rotate(60deg); }
+    .petal-three { transform: translate(-50%, -88%) rotate(120deg); }
+    .petal-four { transform: translate(-50%, -88%) rotate(180deg); }
+    .petal-five { transform: translate(-50%, -88%) rotate(240deg); }
+    .petal-six { transform: translate(-50%, -88%) rotate(300deg); }
+
+    .center {
+      position: absolute;
+      left: 50%;
+      top: 53%;
+      width: 43px;
+      height: 20px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 35%, #fff9c7, #f7d94d 52%, #d4b300 86%);
+      box-shadow:
+        0 0 0 5px rgba(255, 255, 255, 0.58),
+        0 0 20px rgba(255, 241, 105, 0.38);
+      z-index: 5;
+    }
+
+    .flower-light {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #fff36a;
+      box-shadow: 0 0 12px #fff36a;
+      opacity: 0;
+      z-index: 8;
+      animation: lightBlink 2.4s ease-in-out infinite;
+    }
+
+    .light-one { left: 24%; top: 18%; animation-delay: 0.4s; }
+    .light-two { right: 22%; top: 28%; animation-delay: 1s; }
+    .light-three { left: 46%; top: 3%; animation-delay: 1.6s; }
+
+    .wrap {
+      position: absolute;
+      bottom: 0;
+      pointer-events: none;
+      filter: drop-shadow(0 16px 22px rgba(0, 0, 0, 0.28));
+    }
+
+    .wrap-left {
+      left: 50%;
+      width: 245px;
+      height: 270px;
+      transform: translateX(-88%) rotate(-12deg);
+      background:
+        linear-gradient(155deg, rgba(255, 240, 232, 0.98), rgba(211, 164, 147, 0.98));
+      clip-path: polygon(48% 0%, 100% 100%, 8% 88%);
+      z-index: 11;
+    }
+
+    .wrap-right {
+      left: 50%;
+      width: 245px;
+      height: 270px;
+      transform: translateX(-12%) rotate(12deg);
+      background:
+        linear-gradient(205deg, rgba(255, 244, 238, 0.98), rgba(203, 154, 138, 0.98));
+      clip-path: polygon(52% 0%, 92% 88%, 0% 100%);
+      z-index: 11;
+    }
+
+    .wrap-front {
+      left: 50%;
+      width: 220px;
+      height: 190px;
+      transform: translateX(-50%);
+      background:
+        linear-gradient(180deg, #f0d3c2, #c28b78);
+      clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+      z-index: 12;
+    }
+
+    .ribbon {
+      position: absolute;
+      left: 50%;
+      bottom: 95px;
+      transform: translateX(-50%);
+      min-width: 132px;
+      padding: 11px 30px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ff91b3, #ee4d89);
+      color: white;
+      font-size: 21px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-align: center;
+      z-index: 14;
+      box-shadow:
+        0 10px 24px rgba(255, 98, 151, 0.28),
+        inset 0 1px 2px rgba(255, 255, 255, 0.35);
+    }
+
+    .ribbon::before,
+    .ribbon::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 30px;
+      height: 30px;
+      background: #ef5d91;
+      transform: translateY(-50%) rotate(45deg);
+      border-radius: 4px;
+      z-index: -1;
+    }
+
+    .ribbon::before {
+      left: -10px;
+    }
+
+    .ribbon::after {
+      right: -10px;
+    }
+
+    .penguin {
+      position: relative;
+      z-index: 30;
       width: min(210px, 54vw);
       max-height: 170px;
       object-fit: contain;
       border-radius: 22px;
       background: rgba(255, 255, 255, 0.9);
       box-shadow: 0 18px 42px rgba(0, 0, 0, 0.36);
-      z-index: 6;
+      margin-top: -42px;
     }
 
     .final-sign {
-      position: fixed;
-      left: 50%;
-      bottom: 18px;
-      transform: translateX(-50%);
-      z-index: 7;
+      position: relative;
+      z-index: 30;
+      margin-top: 12px;
       color: rgba(255, 224, 235, 0.82);
       font-size: 14px;
       font-weight: 800;
@@ -197,7 +485,79 @@
       text-align: center;
     }
 
-    @media (max-width: 700px) {
+    @keyframes stemGrow {
+      from {
+        transform: translateX(-50%) scaleY(0);
+      }
+
+      to {
+        transform: translateX(-50%) scaleY(1);
+      }
+    }
+
+    @keyframes flowerFade {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes leafOpen {
+      0% {
+        opacity: 0;
+        scale: 0.1;
+      }
+
+      70% {
+        opacity: 1;
+        scale: 1.08;
+      }
+
+      100% {
+        opacity: 1;
+        scale: 1;
+      }
+    }
+
+    @keyframes bloomOpen {
+      0% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.02) rotate(-12deg);
+      }
+
+      68% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.1) rotate(2deg);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1) rotate(0deg);
+      }
+    }
+
+    @keyframes lightBlink {
+      0%, 100% {
+        opacity: 0.1;
+        transform: scale(0.8);
+      }
+
+      45% {
+        opacity: 1;
+        transform: scale(1.22);
+      }
+    }
+
+    @keyframes starDrift {
+      from {
+        transform: translate3d(0, 0, 0);
+      }
+
+      to {
+        transform: translate3d(-70px, 48px, 0);
+      }
+    }
+
+    @media (max-width: 760px) {
       .question-screen {
         padding: 12px;
       }
@@ -226,17 +586,47 @@
         padding: 13px 22px;
       }
 
-      .final-copy {
-        top: 22px;
+      .final-screen {
+        padding-top: 28px;
+      }
+
+      .final-copy h2 {
+        font-size: 29px;
+      }
+
+      .flower-stage {
+        height: 510px;
+      }
+
+      .bouquet {
+        width: 106%;
+        height: 450px;
+        bottom: 22px;
+        transform: translateX(-50%) scale(0.82);
       }
 
       .penguin {
         width: min(180px, 58vw);
-        bottom: 42px;
+        margin-top: -54px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .final-copy h2 {
+        font-size: 26px;
       }
 
-      .final-sign {
-        bottom: 16px;
+      .flower-stage {
+        height: 455px;
+      }
+
+      .bouquet {
+        transform: translateX(-50%) scale(0.72);
+        bottom: 4px;
+      }
+
+      .penguin {
+        margin-top: -60px;
       }
     }
   </style>
@@ -263,11 +653,25 @@
   </section>
 
   <section class="final-screen hidden" id="finalScreen">
-    <iframe id="flowersFrame" class="flowers-frame" title="Hira flowers"></iframe>
+    <div class="stars"></div>
 
     <div class="final-copy">
       <h2>Madem kabul edildi,</h2>
       <p>özen belli olsun dedik.</p>
+    </div>
+
+    <div class="flower-stage">
+      <div class="glow"></div>
+
+      <div class="bouquet" id="bouquet">
+        <div id="flowerLayer"></div>
+
+        <div class="wrap wrap-left"></div>
+        <div class="wrap wrap-right"></div>
+        <div class="wrap wrap-front"></div>
+
+        <div class="ribbon">Hira</div>
+      </div>
     </div>
 
     <img src="penguen.gif" alt="Penguen" class="penguin" />
@@ -278,12 +682,13 @@
   <script>
     const questionScreen = document.getElementById("questionScreen");
     const finalScreen = document.getElementById("finalScreen");
-    const flowersFrame = document.getElementById("flowersFrame");
     const yesBtn = document.getElementById("yesBtn");
     const noBtn = document.getElementById("noBtn");
+    const flowerLayer = document.getElementById("flowerLayer");
 
     let noCount = 0;
     let yesScale = 1;
+    let bouquetBuilt = false;
 
     const noMessages = [
       "Emin misin?",
@@ -318,8 +723,82 @@
       questionScreen.classList.add("hidden");
       finalScreen.classList.remove("hidden");
 
-      flowersFrame.src = "flower.html?v=" + Date.now();
+      if (!bouquetBuilt) {
+        createBouquet();
+        bouquetBuilt = true;
+      }
+
+      setTimeout(() => {
+        finalScreen.classList.add("show");
+      }, 100);
     });
+
+    function createBouquet() {
+      const flowers = [
+        { x: 11, y: 72, r: -34, s: .72, h: 210, c1: "#ff6fa3", c2: "#ffc7dc", z: 4 },
+        { x: 17, y: 28, r: -28, s: .88, h: 265, c1: "#ff7ead", c2: "#ffd2e3", z: 5 },
+        { x: 22, y: 92, r: -24, s: .62, h: 180, c1: "#ff9abc", c2: "#ffe0eb", z: 8 },
+        { x: 27, y: 12, r: -20, s: .98, h: 305, c1: "#f85d96", c2: "#ffc2d8", z: 6 },
+        { x: 32, y: 74, r: -16, s: .74, h: 220, c1: "#ff8fb5", c2: "#ffdae6", z: 9 },
+        { x: 36, y: 36, r: -12, s: .86, h: 270, c1: "#ff6b9f", c2: "#ffd0e0", z: 7 },
+        { x: 40, y: 105, r: -8, s: .58, h: 165, c1: "#ffabc7", c2: "#ffe6ef", z: 10 },
+        { x: 44, y: -16, r: -5, s: 1.08, h: 340, c1: "#ff5f98", c2: "#ffc6da", z: 8 },
+        { x: 48, y: 82, r: -2, s: .68, h: 205, c1: "#ff86b0", c2: "#ffdae7", z: 11 },
+        { x: 52, y: 22, r: 3, s: .95, h: 295, c1: "#f7659c", c2: "#ffd0df", z: 9 },
+        { x: 56, y: 102, r: 7, s: .58, h: 168, c1: "#ff9fbe", c2: "#ffe3ed", z: 10 },
+        { x: 60, y: 46, r: 11, s: .82, h: 252, c1: "#ff76a7", c2: "#ffd4e2", z: 7 },
+        { x: 65, y: 86, r: 16, s: .68, h: 205, c1: "#ff94b8", c2: "#ffe0ea", z: 9 },
+        { x: 70, y: 18, r: 21, s: .93, h: 288, c1: "#ff6fa3", c2: "#ffcfe0", z: 6 },
+        { x: 76, y: 74, r: 28, s: .70, h: 215, c1: "#ffa7c4", c2: "#ffe6ee", z: 8 },
+        { x: 82, y: 38, r: 33, s: .78, h: 248, c1: "#ff7ead", c2: "#ffd7e5", z: 5 },
+        { x: 24, y: 128, r: -22, s: .48, h: 130, c1: "#ffb0ca", c2: "#ffe9f0", z: 13 },
+        { x: 31, y: 138, r: -15, s: .46, h: 118, c1: "#ff8eb4", c2: "#ffdeea", z: 14 },
+        { x: 39, y: 146, r: -8, s: .44, h: 108, c1: "#ff73a5", c2: "#ffd5e3", z: 15 },
+        { x: 58, y: 146, r: 8, s: .44, h: 108, c1: "#ff80ad", c2: "#ffdbe7", z: 15 },
+        { x: 66, y: 138, r: 16, s: .46, h: 118, c1: "#ff9fbe", c2: "#ffe3ed", z: 14 },
+        { x: 73, y: 128, r: 24, s: .48, h: 130, c1: "#ff88b1", c2: "#ffdeea", z: 13 }
+      ];
+
+      flowerLayer.innerHTML = "";
+
+      flowers.forEach((f, index) => {
+        const flower = document.createElement("div");
+        flower.className = "flower";
+
+        flower.style.setProperty("--x", f.x + "%");
+        flower.style.setProperty("--y", f.y + "px");
+        flower.style.setProperty("--r", f.r + "deg");
+        flower.style.setProperty("--s", f.s);
+        flower.style.setProperty("--h", f.h + "px");
+        flower.style.setProperty("--c1", f.c1);
+        flower.style.setProperty("--c2", f.c2);
+        flower.style.setProperty("--delay", index * 0.085 + "s");
+        flower.style.setProperty("--z", f.z);
+
+        flower.innerHTML = `
+          <div class="stem"></div>
+
+          <div class="leaf leaf-one"></div>
+          <div class="leaf leaf-two"></div>
+          <div class="leaf leaf-three"></div>
+
+          <div class="bloom">
+            <div class="petal petal-one"></div>
+            <div class="petal petal-two"></div>
+            <div class="petal petal-three"></div>
+            <div class="petal petal-four"></div>
+            <div class="petal petal-five"></div>
+            <div class="petal petal-six"></div>
+            <div class="center"></div>
+            <div class="flower-light light-one"></div>
+            <div class="flower-light light-two"></div>
+            <div class="flower-light light-three"></div>
+          </div>
+        `;
+
+        flowerLayer.appendChild(flower);
+      });
+    }
   </script>
 </body>
 </html>
