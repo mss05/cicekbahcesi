@@ -1,485 +1,203 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Beni Affet 🥺</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Çiçek</title>
 
-  :root {
-    --pink-deep: #d6006e;
-    --techno-cyan: #00e5ff;
-    --techno-cyan-dark: #004d40;
-  }
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-  body {
-    min-height: 100vh;
-    background: linear-gradient(160deg, #ffe9f5 0%, #ffd6ee 40%, #ffecf9 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Nunito', sans-serif;
-    overflow: hidden;
-    transition: background 1.5s ease;
-  }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffe6f0, #fff8dc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
 
-  /* ---- ANA EKRAN ---- */
-  #main-screen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.4rem;
-    padding: 2rem 1.5rem;
-    max-width: 560px;
-    width: 100%;
-    text-align: center;
-    z-index: 10;
-  }
+    .card {
+      width: 90%;
+      max-width: 520px;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 28px;
+      border-radius: 28px;
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.18);
+    }
 
-  .banner-wrap {
-    width: 100%;
-    max-width: 320px;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 6px 30px rgba(255, 77, 166, 0.3);
-    border: 3px solid rgba(255, 141, 203, 0.5);
-    margin-bottom: 10px;
-  }
-  .banner-wrap img { width: 100%; display: block; }
+    .banner {
+      width: 100%;
+      max-width: 360px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
 
-  .msg-box {
-    min-height: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    h1 {
+      color: #d6336c;
+      font-size: 30px;
+      margin-bottom: 30px;
+    }
 
-  #message {
-    font-family: 'Pacifico', cursive;
-    font-size: clamp(1.15rem, 4.5vw, 1.75rem);
-    color: var(--pink-deep);
-    text-shadow: 0 2px 14px rgba(214, 0, 110, 0.25);
-    line-height: 1.5;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    max-width: 480px;
-  }
-  #message.hidden { opacity: 0; transform: scale(0.95); }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
 
-  .btn-area {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    position: relative;
-    min-height: 80px;
-    width: 100%;
-  }
+    button {
+      border: none;
+      border-radius: 18px;
+      padding: 14px 28px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
 
-  #yes-btn {
-    background: linear-gradient(135deg, #ff6eba, #ff3fa0);
-    color: #fff;
-    border: none;
-    border-radius: 60px;
-    padding: 14px 36px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 900;
-    cursor: pointer;
-    box-shadow: 0 5px 22px rgba(255, 63, 160, 0.45);
-    transition: all 0.3s cubic-bezier(.34,1.56,.64,1);
-  }
-  #yes-btn:hover { transform: scale(1.06); }
-  #yes-btn:active { transform: scale(0.97); }
+    #yesBtn {
+      background-color: #ff4d8d;
+      color: white;
+      transform: scale(1);
+      z-index: 2;
+    }
 
-  #no-btn {
-    background: #fff;
-    color: #bbb;
-    border: 2px solid #e8d5e2;
-    border-radius: 60px;
-    padding: 11px 26px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  #no-btn:hover { background: #fff0f7; color: #999; }
+    #noBtn {
+      background-color: #eeeeee;
+      color: #333333;
+      z-index: 1;
+    }
 
-  /* ---- EVET EKRANI & CSS ÇİÇEK BAHÇESİ ---- */
-  #yes-screen {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-    height: 100vh;
-    animation: fadeIn 1s forwards;
-    position: relative;
-    z-index: 20;
-    padding-top: 15vh;
-  }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    #yesBtn:hover {
+      background-color: #e03174;
+    }
 
-  /* 23 Çiçeğin Çıkacağı Bahçe Alanı */
-  #garden {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
-    height: 60vh;
-    pointer-events: none;
-  }
+    #noBtn:hover {
+      background-color: #dddddd;
+    }
 
-  .flower-wrapper {
-    position: absolute;
-    bottom: -20px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    transform-origin: bottom center;
-  }
+    .hidden {
+      display: none;
+    }
 
-  /* Çiçeğin Sapı */
-  .stem {
-    width: 8px;
-    height: 0;
-    background: linear-gradient(to top, var(--techno-cyan-dark), var(--techno-cyan));
-    box-shadow: 0 0 15px var(--techno-cyan), inset 0 0 5px rgba(255,255,255,0.5);
-    border-radius: 4px;
-    position: relative;
-    animation: growStem 2.5s ease-in-out forwards;
-  }
-  @keyframes growStem { to { height: 260px; } }
+    .flower {
+      font-size: 100px;
+      margin-bottom: 18px;
+      animation: flowerPop 1s infinite alternate;
+    }
 
-  /* Büyülü Yapraklar (Leaves) */
-  .leaf {
-    position: absolute;
-    width: 70px;
-    height: 35px;
-    background: rgba(0, 229, 255, 0.15);
-    border-bottom: 3px solid var(--techno-cyan);
-    box-shadow: inset 0 -5px 15px rgba(0, 229, 255, 0.5);
-    transform: scale(0);
-  }
-  .leaf.right {
-    bottom: 50px; left: 6px;
-    border-radius: 0 100% 0 100%;
-    transform-origin: bottom left;
-    animation: growLeafRight 1.5s ease-out forwards;
-  }
-  .leaf.left {
-    bottom: 110px; right: 6px;
-    border-radius: 100% 0 100% 0;
-    transform-origin: bottom right;
-    animation: growLeafLeft 1.5s ease-out forwards;
-  }
-  @keyframes growLeafRight { to { transform: scale(1) rotate(15deg); } }
-  @keyframes growLeafLeft { to { transform: scale(1) rotate(-15deg); } }
+    .penguin {
+      width: 230px;
+      max-width: 85%;
+      border-radius: 20px;
+      margin-top: 20px;
+    }
 
-  /* Çiçek Başlığı (Kasımpatı) */
-  .flower-head {
-    position: absolute;
-    top: 0; left: 4px;
-  }
+    .finalText {
+      color: #d6336c;
+      font-size: 28px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
 
-  /* Kasımpatı Taç Yaprakları (Petals) */
-  .petal {
-    position: absolute;
-    bottom: 0; left: 0;
-    transform-origin: bottom center;
-    border-radius: 50% 50% 10% 10%;
-    opacity: 0;
-  }
+    @keyframes flowerPop {
+      from {
+        transform: scale(1);
+      }
 
-  .layer1 {
-    width: 18px; height: 130px; margin-left: -9px;
-    background: linear-gradient(to top, #ff1493, #ffa6d9);
-    box-shadow: 0 0 15px #ff1493;
-    animation: bloom 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-  }
-  .layer2 {
-    width: 14px; height: 95px; margin-left: -7px;
-    background: linear-gradient(to top, #d6006e, #ff6eba);
-    box-shadow: 0 0 12px #d6006e;
-    animation: bloom 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-  }
-  .layer3 {
-    width: 10px; height: 60px; margin-left: -5px;
-    background: linear-gradient(to top, #9c27b0, #ff4da6);
-    box-shadow: 0 0 10px #ff4da6;
-    animation: bloom 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-  }
+      to {
+        transform: scale(1.15);
+      }
+    }
 
-  @keyframes bloom {
-    0% { transform: rotate(calc((360deg / var(--total)) * var(--i))) scale(0); opacity: 0; }
-    100% { transform: rotate(calc((360deg / var(--total)) * var(--i))) scale(1) translateY(-5px); opacity: 0.95; }
-  }
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 24px;
+      }
 
-  /* Çiçeğin Sarı/Turuncu Göbeği */
-  .flower-center {
-    position: absolute;
-    top: 0; left: 0;
-    width: 32px; height: 32px;
-    background: radial-gradient(circle, #ffeb3b, #ff9800);
-    box-shadow: 0 0 25px #ffeb3b, inset 0 0 10px #ff9800;
-    border-radius: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    z-index: 50;
-    animation: popCenter 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-  }
-  @keyframes popCenter { to { transform: translate(-50%, -50%) scale(1); } }
+      button {
+        font-size: 18px;
+        padding: 12px 22px;
+      }
 
-  /* Yazılar ve Penguen */
-  .yes-text {
-    font-family: 'Pacifico', cursive;
-    font-size: clamp(1.8rem, 6vw, 3rem);
-    color: #ff8dcb;
-    text-shadow: 0 0 20px rgba(255, 141, 203, 0.8);
-    margin-bottom: 20px;
-    opacity: 0;
-    z-index: 1000;
-    animation: fadeIn 2s forwards 5s, glow 2s ease-in-out infinite alternate 5s;
-  }
-  @keyframes glow {
-    from { text-shadow: 0 0 10px rgba(255,141,203,0.5); }
-    to   { text-shadow: 0 0 30px rgba(255,141,203,1), 0 0 50px rgba(255,80,180,0.6); }
-  }
-
-  .penguin-row {
-    display: flex; align-items: center; gap: 0.5rem;
-    opacity: 0;
-    z-index: 1000;
-    animation: fadeIn 2s forwards 5.5s;
-  }
-  .penguin-gif {
-    max-width: 140px; height: auto;
-    animation: floatPenguin 3s ease-in-out infinite alternate;
-  }
-  @keyframes floatPenguin {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-15px); }
-  }
-
-  .floater {
-    position: fixed; pointer-events: none;
-    animation: floatUp 2.5s ease-out forwards;
-    font-size: 1.6rem; z-index: 999;
-  }
-  @keyframes floatUp {
-    0%   { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
-    100% { opacity: 0; transform: translateY(-220px) rotate(20deg) scale(0.4); }
-  }
-
-  .sparkle {
-    position: fixed; pointer-events: none;
-    width: 6px; height: 6px; border-radius: 50%;
-    animation: sparkleAnim 1.5s ease-out forwards;
-    z-index: 998;
-  }
-  @keyframes sparkleAnim {
-    0%   { opacity: 1; transform: translate(0,0) scale(1); }
-    100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
-  }
-</style>
+      .flower {
+        font-size: 80px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div id="main-screen">
-  <div class="banner-wrap">
-    <img src="banner.gif" alt="Seni Seviyorum Banner" />
+  <div class="card" id="questionScreen">
+    <img src="banner.gif" alt="Banner" class="banner">
+
+    <h1>Çiçeği kabul ediyor musun?</h1>
+
+    <div class="buttons">
+      <button id="yesBtn">Evet</button>
+      <button id="noBtn">Hayır</button>
+    </div>
   </div>
-  <div class="msg-box">
-    <div id="message">Seni Çok Seviyorum, Beni Affeder Misin? 🥺</div>
+
+  <div class="card hidden" id="finalScreen">
+    <div class="flower">🌸</div>
+
+    <div class="finalText">Çiçek kabul edildi!</div>
+
+    <img src="penguen.gif" alt="Penguen" class="penguin">
   </div>
-  <div class="btn-area" id="btn-area">
-    <button id="yes-btn" onclick="sayYes()">Evet 💕</button>
-    <button id="no-btn" onclick="sayNo()">Hayır</button>
-  </div>
-</div>
 
-<div id="yes-screen">
-  <div class="yes-text">Seni çok seviyorum! 💖</div>
-  <div class="penguin-row">
-    <img src="penguen.gif" alt="Kalp Atan Penguen" class="penguin-gif" />
-  </div>
-  <div id="garden"></div>
-</div>
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const questionScreen = document.getElementById("questionScreen");
+    const finalScreen = document.getElementById("finalScreen");
 
-<script>
-  const messages = [
-    "Seni Çok Seviyorum, Beni Affeder Misin? 🥺",
-    "Çabalayacağız... Lütfen beni affet 💝",
-    "Bir şans daha ver, pişman olmayacaksın 🙏",
-    "Seni kaybetmek istemiyorum 💕",
-    "Sensiz bir hiçim, affetmeden gidemezsin! 🥺",
-    "Söz veriyorum, her şey daha güzel olacak 💌",
-    "Hayatımın en güzel detayı sensin...",
-    "Sana layık biri olmak için çabalıyorum 🐧❤️",
-    "Bir bak şu halime! Nolur beni affet! 😭"
-  ];
+    let noClickCount = 0;
+    let yesScale = 1;
 
-  let noCount = 0;
-  let yesFontSize = 1.25; 
-  let yesPaddingV = 14;
-  let yesPaddingH = 36;
-  const msgEl = document.getElementById('message');
-  const yesBtn = document.getElementById('yes-btn');
-  const noBtn  = document.getElementById('no-btn');
-
-  function sayNo() {
-    noCount++;
-    msgEl.classList.add('hidden');
-    setTimeout(() => {
-      const msgIndex = Math.min(noCount, messages.length - 1);
-      msgEl.textContent = messages[msgIndex];
-      msgEl.classList.remove('hidden');
-    }, 150);
-
-    yesFontSize += 0.4;
-    yesPaddingV += 8;
-    yesPaddingH += 16;
-    yesBtn.style.fontSize = yesFontSize + 'rem';
-    yesBtn.style.padding  = `${yesPaddingV}px ${yesPaddingH}px`;
-
-    if (noCount >= 13) {
-        noBtn.style.display = 'none'; 
-    }
-  }
-
-  function sayYes() {
-    const emojis = ['💕','💗','💖','💝','🌸','✨','💞'];
-    for (let i = 0; i < 35; i++) {
-      setTimeout(() => {
-        const el = document.createElement('div');
-        el.className = 'floater';
-        el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-        el.style.left = (5 + Math.random() * 90) + 'vw';
-        el.style.top  = (60 + Math.random() * 30) + 'vh';
-        document.body.appendChild(el);
-        setTimeout(() => el.remove(), 2500);
-      }, i * 60);
-    }
-
-    setTimeout(() => {
-      document.getElementById('main-screen').style.display = 'none';
-      const ys = document.getElementById('yes-screen');
-      ys.style.display = 'flex';
-      
-      document.body.style.background = 'radial-gradient(circle at center, #2a0845 0%, #12011a 60%, #000000 100%)';
-      
-      createGardenOf23(); // Çiçek tarlasını kur
-      
-      for(let i=0; i<60; i++) {
-        setTimeout(() => sparkle(), 2500 + (Math.random() * 3000));
-      }
-    }, 800);
-  }
-
-  function createGardenOf23() {
-    const garden = document.getElementById('garden');
-    garden.innerHTML = ''; 
-    const totalFlowers = 23;
-    
-    // Çiçeklerin üst üste binmesini önlemek için ekranı 23'e bölen sistem:
-    let positions = [];
-    const step = 94 / totalFlowers; // Ekranın %94'lük kısmını eşit böl
-    for (let i = 0; i < totalFlowers; i++) {
-      // Eşit aralık + çok ufak doğal sapma
-      positions.push(3 + (i * step) + (Math.random() * (step * 0.6)));
-    }
-    // Hangi aralıkta hangi boyut/gecikme çıkacağı rastgele olsun diye diziyi karıştır
-    positions.sort(() => Math.random() - 0.5);
-
-    for (let i = 0; i < totalFlowers; i++) {
-      let flowerWrapper = document.createElement('div');
-      flowerWrapper.className = 'flower-wrapper';
-      
-      // Artık her çiçeğin kesinlikle kendine ait bir yatay konumu var!
-      let leftPos = positions[i]; 
-      let scale = 0.35 + Math.random() * 0.50; // Boyut aralığı
-      let delay = Math.random() * 3; // Açma gecikmesi
-      
-      flowerWrapper.style.left = leftPos + 'vw';
-      flowerWrapper.style.transform = `scale(${scale})`;
-      flowerWrapper.style.zIndex = Math.floor(scale * 100); // Büyük olan önde dursun
-      
-      let stem = document.createElement('div');
-      stem.className = 'stem';
-      stem.style.animationDelay = `${0.5 + delay}s`;
-      
-      let leafR = document.createElement('div');
-      leafR.className = 'leaf right';
-      leafR.style.animationDelay = `${1.2 + delay}s`;
-      
-      let leafL = document.createElement('div');
-      leafL.className = 'leaf left';
-      leafL.style.animationDelay = `${1.5 + delay}s`;
-      
-      let head = document.createElement('div');
-      head.className = 'flower-head';
-      
-      let center = document.createElement('div');
-      center.className = 'flower-center';
-      center.style.animationDelay = `${4.5 + delay}s`;
-      head.appendChild(center);
-      
-      buildChrysanthemum(head, delay);
-      
-      stem.appendChild(leafR);
-      stem.appendChild(leafL);
-      stem.appendChild(head);
-      flowerWrapper.appendChild(stem);
-      garden.appendChild(flowerWrapper);
-    }
-  }
-
-  function buildChrysanthemum(flowerHead, extraDelay) {
-    // Toplam yaprak sayısı 23 çiçekte kasmaması için optimize edildi
-    const layers = [
-      { class: 'layer1', count: 24, delayStart: 2.2 },
-      { class: 'layer2', count: 18, delayStart: 2.8 },
-      { class: 'layer3', count: 12, delayStart: 3.4 }
+    const noMessages = [
+      "Emin misin?",
+      "Bir daha düşün",
+      "Bence evet demelisin",
+      "Hayır küçülüyor farkındaysan",
+      "Kaçış yok",
+      "Son şans",
+      "Artık evet zorunlu"
     ];
 
-    layers.forEach(layer => {
-      for (let i = 0; i < layer.count; i++) {
-        let petal = document.createElement('div');
-        petal.className = `petal ${layer.class}`;
-        petal.style.setProperty('--i', i);
-        petal.style.setProperty('--total', layer.count);
-        
-        let totalDelay = layer.delayStart + extraDelay + (i * 0.05);
-        petal.style.animationDelay = `${totalDelay}s`;
-        
-        flowerHead.appendChild(petal);
+    noBtn.addEventListener("click", function () {
+      noClickCount++;
+
+      yesScale += 0.35;
+      yesBtn.style.transform = "scale(" + yesScale + ")";
+
+      noBtn.textContent = noMessages[Math.min(noClickCount - 1, noMessages.length - 1)];
+
+      if (noClickCount >= 4) {
+        noBtn.style.transform = "scale(0.8)";
+      }
+
+      if (noClickCount >= 6) {
+        noBtn.style.display = "none";
+        yesBtn.textContent = "Evet demek zorundasın";
+        yesBtn.style.transform = "scale(2)";
       }
     });
-  }
 
-  function sparkle() {
-    const el = document.createElement('div');
-    el.className = 'sparkle';
-    const cx = Math.random() * window.innerWidth;
-    const cy = Math.random() * (window.innerHeight - 200) + 100; 
-    el.style.left = cx + 'px';
-    el.style.top  = cy + 'px';
-    
-    const tx = (Math.random() - 0.5) * 300;
-    const ty = (Math.random() - 0.5) * 300;
-    el.style.setProperty('--tx', tx + 'px');
-    el.style.setProperty('--ty', ty + 'px');
-    
-    const colors = ['#00e5ff', '#ff1493', '#ff8dcb', '#fff', '#ffeb3b'];
-    el.style.background = colors[Math.floor(Math.random() * colors.length)];
-    el.style.boxShadow = `0 0 10px ${el.style.background}`;
-    
-    document.body.appendChild(el);
-    setTimeout(() => el.remove(), 1500);
-  }
-</script>
+    yesBtn.addEventListener("click", function () {
+      questionScreen.classList.add("hidden");
+      finalScreen.classList.remove("hidden");
+    });
+  </script>
+
 </body>
 </html>
